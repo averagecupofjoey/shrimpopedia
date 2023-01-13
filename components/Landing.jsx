@@ -9,7 +9,7 @@ const Landing = () => {
   return (
     <div
       id='landing'
-      className='flex flex-col-reverse justify-center sm:flex-row px-6 items-center gap-8 py-20 mb-12 flex-grow'
+      className='flex flex-col-reverse justify-center sm:flex-row px-6 items-center gap-8 mb-12 flex-grow'
     >
       <div className='sm:w-1/2'>
         <h2 className='max-w-md text-4xl font-bold text center sm:text-5xl sm:text-left'>

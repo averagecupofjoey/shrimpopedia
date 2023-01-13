@@ -38,9 +38,7 @@ const Navbar = () => {
       ref={navRef}
       style={{ backgroundColor: `${navBg}` }}
       className={
-        shadow
-          ? 'fixed w-full h-20 shadow-xl z-[100]'
-          : 'fixed w-full h-20 z-[100]'
+        shadow ? 'w-full h-20 shadow-xl z-[100]' : ' w-full h-20 z-[100]'
       }
     >
       <div className='flex justify-between items-center w-full h-full px-2 2xl:px-16'>
@@ -58,12 +56,17 @@ const Navbar = () => {
             <Link href='/#skills'>
               <li className='ml-10 text-sm uppercase hover:border-b'>Search</li>
             </Link>
-            <Link href='/#projects'>
+            <Link href='/upload'>
               <li className='ml-10 text-sm uppercase hover:border-b'>Upload</li>
             </Link>
             <Link href='/#contact'>
               <li className='ml-10 text-sm uppercase hover:border-b'>
                 Resources
+              </li>
+            </Link>
+            <Link href='/#contact'>
+              <li className='ml-10 text-sm uppercase hover:border-b'>
+                My Tank
               </li>
             </Link>
           </ul>
@@ -92,7 +95,7 @@ const Navbar = () => {
             <div className='flex w-full items-center justify-between'>
               <Link href='/'>
                 <Image
-                  src={'/assets/JRElogo.png'}
+                  src={'/assets/logo.png'}
                   alt='/'
                   width='87'
                   height='35'

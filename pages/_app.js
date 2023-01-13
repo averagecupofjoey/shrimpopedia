@@ -1,11 +1,16 @@
 import '../styles/globals.css';
 import Navbar from '../components/Navbar';
+import { SessionProvider } from 'next-auth/react';
 
 export default function App({ Component, pageProps }) {
   return (
-    <div className='flex flex-col h-screen'>
-      <Navbar />
-      <Component {...pageProps} />
-    </div>
+    <SessionProvider session={pageProps.session}>
+      <div className='flex flex-col h-screen'>
+        <Navbar />
+        <div className='flex flex-1 overflow-auto'>
+          <Component {...pageProps} />
+        </div>
+      </div>
+    </SessionProvider>
   );
 }
