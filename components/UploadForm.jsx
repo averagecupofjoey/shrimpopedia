@@ -19,10 +19,11 @@ registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 
 const UploadForm = () => {
   const [files, setFiles] = useState([]);
-  const [sell, setSell] = useState(false);
+  const [sell, setSell] = useState('No');
   const [waterType, setWaterType] = useState('null');
 
   const handleSale = (e) => {
+    e.preventDefault();
     setSell(e.target.value);
   };
 
@@ -57,6 +58,41 @@ const UploadForm = () => {
           />
         </div>
       </div>
+      <div className='grid md:grid-cols-3 gap-4 w-full py-2'>
+        <div className='flex flex-col'>
+          <label className='uppercase text-sm py-2'>Primary Color</label>
+          <select className='border-2 rounded-lg p-3 border-gray-300'>
+            <option value='Red'>Red</option>
+            <option value='Orange'>Orange</option>
+            <option value='Yellow'>Yellow</option>
+            <option value='Blue'>Blue</option>
+            <option value='Green'>Green</option>
+            <option value='Black'>Black</option>
+            <option value='White'>White</option>
+            <option value='Purple'>Purple</option>
+          </select>
+        </div>
+        <div className='flex flex-col'>
+          <label className='uppercase text-sm py-2'>Secondary Color</label>
+          <select className='border-2 rounded-lg p-3 border-gray-300'>
+            <option value='Red'>Red</option>
+            <option value='Orange'>Orange</option>
+            <option value='Yellow'>Yellow</option>
+            <option value='Blue'>Blue</option>
+            <option value='Green'>Green</option>
+            <option value='Black'>Black</option>
+            <option value='White'>White</option>
+            <option value='Purple'>Purple</option>
+          </select>
+        </div>
+        <div className='flex flex-col'>
+          <label className='uppercase text-sm py-2'>Morph Type</label>
+          <select className='border-2 rounded-lg p-3 border-gray-300'>
+            <option value='Solid'>Solid</option>
+            <option value='Clear'>Clear</option>
+          </select>
+        </div>
+      </div>
       <div className='flex flex-col py-2'>
         <label className='uppercase text-sm py-2'>Water Type?</label>
         <select className='border-2 rounded-lg p-3 border-gray-300'>
@@ -80,11 +116,11 @@ const UploadForm = () => {
           onChange={handleSale}
           className='border-2 rounded-lg p-3 border-gray-300'
         >
-          <option value={false}>No</option>
-          <option value={true}>Yes</option>
+          <option value='No'>No</option>
+          <option value='Yes'>Yes</option>
         </select>
       </div>
-      {sell === true && (
+      {sell === 'Yes' && (
         <div className='flex flex-col py-2'>
           <label className='uppercase text-sm py-2'>Sale Info</label>
           <textarea

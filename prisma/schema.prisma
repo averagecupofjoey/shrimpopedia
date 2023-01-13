@@ -44,6 +44,7 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
+  shrimpies     Shrimp[]
 }
 
 model VerificationToken {
@@ -52,4 +53,17 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+model Shrimp {
+  id            String    @id @default(cuid())
+  name          String
+  sciName       String
+  waterType     String
+  image         String
+  notes         String?
+  sale          Boolean
+  saleNotes     String?
+  owner         User      @relation(fields: [ownerEmail], references: [email])
+  ownerEmail    String
 }
