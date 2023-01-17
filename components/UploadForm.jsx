@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import Script from 'next/script';
 import Resizer from 'react-image-file-resizer';
@@ -48,8 +48,14 @@ const UploadForm = () => {
   const [sell, setSell] = useState('No');
   const [waterType, setWaterType] = useState('null');
   const [imagePreview, setImagePreview] = useState('');
-  const [modalOpen, setModalOpen] = useState('No');
+  // const [modalOpen, setModalOpen] = useState('No');
   const [modalIsOpen, setIsOpen] = React.useState(false);
+  const [fileType, setFileType] = useState('');
+
+  const [cropData, setCropData] = useState('#');
+  const [cropper, setCropper] = useState();
+
+  const [photo, setPhoto] = useState('');
 
   const handleSale = (e) => {
     e.preventDefault();
@@ -62,8 +68,9 @@ const UploadForm = () => {
     const file = e.target.files[0];
     const image = await resizeFile(file);
     // console.log('****', image);
-    // setImagePreview(URL.createObjectURL(image));
-    setImagePreview(image);
+    setImagePreview(URL.createObjectURL(e.target.files[0]));
+    // setImagePreview(image);
+    setFileType(file.type);
     openModal();
   };
 
@@ -112,7 +119,17 @@ const UploadForm = () => {
   }
 
   function closeModal() {
+    getCroppedPhoto();
     setIsOpen(false);
+  }
+
+  // useEffect(() => {
+  //   if (cropper) cropper.setDragMode('move');
+  // }, [cropper]);
+
+  function getCroppedPhoto() {
+    let newPhoto = cropper.getCroppedCanvas().toDataURL({ fileType });
+    setPhoto(newPhoto);
   }
 
   return (
@@ -133,9 +150,36 @@ const UploadForm = () => {
         style={customStyles}
         contentLabel='Example Modal'
       >
-        <h1>THIS IS THE MODAL</h1>
-        <img src={imagePreview}></img>
-        <button onClick={closeModal}>close</button>
+        <h1 className='text-center'>Crop Image Display</h1>
+        <br></br>
+        <Cropper
+          // className='max-h-[10%] max-w-full'
+          style={{ height: 400, width: '100%' }}
+          zoomTo={0.5}
+          initialAspectRatio={1}
+          preview='.img-preview'
+          src={imagePreview}
+          viewMode={1}
+          minCropBoxHeight={100}
+          minCropBoxWidth={100}
+          maxCropBoxHeight={100}
+          maxCropBoxWidth={100}
+          background={false}
+          responsive={true}
+          autoCropArea={1}
+          checkOrientation={false} // https://github.com/fengyuanchen/cropperjs/issues/671
+          onInitialized={(instance) => {
+            setCropper(instance);
+          }}
+          guides={true}
+          cropBoxResizable={false}
+          movable={true}
+          toggleDragModeOnDblclick={false}
+          dragMode='move'
+        />
+        {/* <img src={imagePreview}></img> */}
+        <br></br>
+        <button onClick={closeModal}>Use this image</button>
       </Modal>
 
       <form action='/' method='post' encType='text/plain'>
@@ -153,11 +197,18 @@ const UploadForm = () => {
             // onChange={openModal}
           />
         </div>
-        <div className='previewContainer'>
-          <div>
+        <div className='previewContainer w-[400px] h-[400px]'>
+          {/* <div>
             <img src={imagePreview} id='image'></img>
-          </div>
-          <img src='' id='output'></img>
+          </div> */}
+          {photo !== '' && (
+            <img
+              src={photo}
+              id='output'
+              className='h-full w-full'
+              alt='shrimp pic'
+            ></img>
+          )}
         </div>
         <div className='grid md:grid-cols-2 gap-4 w-full py-2'>
           <div className='flex flex-col'>
