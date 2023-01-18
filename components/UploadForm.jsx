@@ -184,7 +184,6 @@ const UploadForm = () => {
 
   const submitData = async (e) => {
     e.preventDefault();
-    console.log('In submit data function');
     try {
       const body = {
         name,
