@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "Shrimp" ALTER COLUMN "sale" SET DATA TYPE TEXT;

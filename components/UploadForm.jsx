@@ -4,6 +4,7 @@ import Script from 'next/script';
 import Resizer from 'react-image-file-resizer';
 import Cropper from 'react-cropper';
 import Modal from 'react-modal';
+import Router from 'next/router';
 
 import '../node_modules/cropperjs/dist/cropper.min.css';
 
@@ -45,8 +46,6 @@ import '../node_modules/cropperjs/dist/cropper.min.css';
 
 const UploadForm = () => {
   const [files, setFiles] = useState([]);
-  const [sell, setSell] = useState('No');
-  const [waterType, setWaterType] = useState('null');
   const [imagePreview, setImagePreview] = useState('');
   // const [modalOpen, setModalOpen] = useState('No');
   const [modalIsOpen, setIsOpen] = React.useState(false);
@@ -55,11 +54,62 @@ const UploadForm = () => {
   const [cropData, setCropData] = useState('#');
   const [cropper, setCropper] = useState();
 
-  const [photo, setPhoto] = useState('');
+  //Form fields
+  const [species, setSpecies] = useState();
+  const [name, setName] = useState();
+  const [colorOne, setColorOne] = useState('Red');
+  const [colorTwo, setColorTwo] = useState('N/A');
+  const [morphType, setMorphType] = useState('Solid');
+  const [waterType, setWaterType] = useState('Freshwater');
+  const [notes, setNotes] = useState('');
+  const [sell, setSell] = useState('No');
+  const [saleInfo, setSaleInfo] = useState('');
+  const [photo, setPhoto] = useState(null);
+
+  //Form state handlers
+  const handleSpecies = (e) => {
+    e.preventDefault();
+    setSpecies(e.target.value);
+  };
+
+  const handleName = (e) => {
+    e.preventDefault();
+    setName(e.target.value);
+  };
+
+  const handleColorOne = (e) => {
+    e.preventDefault();
+    setColorOne(e.target.value);
+  };
+
+  const handleColorTwo = (e) => {
+    e.preventDefault();
+    setColorTwo(e.target.value);
+  };
+
+  const handleMorphType = (e) => {
+    e.preventDefault();
+    setMorphType(e.target.value);
+  };
+
+  const handleWaterType = (e) => {
+    e.preventDefault();
+    setWaterType(e.target.value);
+  };
+
+  const handleNotes = (e) => {
+    e.preventDefault();
+    setNotes(e.target.value);
+  };
 
   const handleSale = (e) => {
     e.preventDefault();
     setSell(e.target.value);
+  };
+
+  const handleSaleInfo = (e) => {
+    e.preventDefault();
+    setSaleInfo(e.target.value);
   };
 
   const updateImagePreview = async (e) => {
@@ -132,6 +182,33 @@ const UploadForm = () => {
     setPhoto(newPhoto);
   }
 
+  const submitData = async (e) => {
+    e.preventDefault();
+    console.log('In submit data function');
+    try {
+      const body = {
+        name,
+        species,
+        waterType,
+        photo,
+        notes,
+        sell,
+        saleInfo,
+        colorOne,
+        colorTwo,
+        morphType,
+      };
+      await fetch(`/api/shrimp`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      });
+      await Router.push('/shrimp');
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <>
       {/* <Script src='../node_modules/cropperjs/dist/cropper.js' /> */}
@@ -142,7 +219,7 @@ const UploadForm = () => {
         </div>
       )} */}
 
-      <button onClick={openModal}>Open Modal</button>
+      {/* <button onClick={openModal}>Open Modal</button> */}
       <Modal
         isOpen={modalIsOpen}
         onAfterOpen={afterOpenModal}
@@ -182,7 +259,7 @@ const UploadForm = () => {
         <button onClick={closeModal}>Use this image</button>
       </Modal>
 
-      <form action='/' method='post' encType='text/plain'>
+      <form onSubmit={submitData} encType='text/plain'>
         <div className='fileInput flex flex-col items-center'>
           <label htmlFor='image_upload'>
             Choose image to upload (PNG, JPG)
@@ -197,19 +274,19 @@ const UploadForm = () => {
             // onChange={openModal}
           />
         </div>
-        <div className='previewContainer w-[400px] h-[400px]'>
-          {/* <div>
+        {photo !== null && (
+          <div className='previewContainer w-[400px] h-[400px] flex items-center justify-center'>
+            {/* <div>
             <img src={imagePreview} id='image'></img>
           </div> */}
-          {photo !== '' && (
             <img
               src={photo}
               id='output'
               className='h-full w-full'
               alt='shrimp pic'
             ></img>
-          )}
-        </div>
+          </div>
+        )}
         <div className='grid md:grid-cols-2 gap-4 w-full py-2'>
           <div className='flex flex-col'>
             <label htmlFor='species' className='uppercase text-sm py-2'>
@@ -221,6 +298,7 @@ const UploadForm = () => {
               name='species'
               placeholder='e.g: Neocaridina'
               id='species'
+              onChange={handleSpecies}
             />
           </div>
           <div className='flex flex-col'>
@@ -233,6 +311,7 @@ const UploadForm = () => {
               name='name'
               id='name'
               placeholder='e.g: Cherry Shrimp'
+              onChange={handleName}
             />
           </div>
         </div>
@@ -245,6 +324,7 @@ const UploadForm = () => {
               name='colorOne'
               id='colorOne'
               className='border-2 rounded-lg p-3 border-gray-300'
+              onChange={handleColorOne}
             >
               <option value='Red'>Red</option>
               <option value='Orange'>Orange</option>
@@ -264,6 +344,7 @@ const UploadForm = () => {
               id='colorTwo'
               name='colorTwo'
               className='border-2 rounded-lg p-3 border-gray-300'
+              onChange={handleColorTwo}
             >
               <option value='Red'>Red</option>
               <option value='Orange'>Orange</option>
@@ -273,6 +354,7 @@ const UploadForm = () => {
               <option value='Black'>Black</option>
               <option value='White'>White</option>
               <option value='Purple'>Purple</option>
+              <option value='N/A'>N/A</option>
             </select>
           </div>
           <div className='flex flex-col'>
@@ -283,6 +365,7 @@ const UploadForm = () => {
               name='morphType'
               id='morphType'
               className='border-2 rounded-lg p-3 border-gray-300'
+              onChange={handleMorphType}
             >
               <option value='Solid'>Solid</option>
               <option value='Clear'>Clear</option>
@@ -297,6 +380,7 @@ const UploadForm = () => {
             name='waterType'
             id='waterType'
             className='border-2 rounded-lg p-3 border-gray-300'
+            onChange={handleWaterType}
           >
             <option value='Freshwater'>Freshwater</option>
             <option value='Saltwater'>Saltwater</option>
@@ -312,6 +396,7 @@ const UploadForm = () => {
             name='notes'
             id='notes'
             placeholder='Add any interesting notes that you want to about this species here!'
+            onChange={handleNotes}
           ></textarea>
         </div>
         <div className='flex flex-col py-2'>
@@ -338,10 +423,18 @@ const UploadForm = () => {
               rows='5'
               name='saleInfo'
               placeholder='Add your sale inquery contact information'
+              onChange={handleSaleInfo}
             ></textarea>
           </div>
         )}
-        <button className='w-full p-4 mt-4 text-gray-100'>Send Message</button>
+        <button
+          className='w-full p-4 mt-4 text-gray-100 bg-slate-500 hover:text-gray-800'
+          // disabled={!photo || !species || !name}
+          // disabled={true}
+          type='submit'
+        >
+          Add to Shrimpopedia!
+        </button>
       </form>
     </>
   );
