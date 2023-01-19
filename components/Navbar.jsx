@@ -64,7 +64,7 @@ const Navbar = () => {
                 Resources
               </li>
             </Link>
-            <Link href='/#contact'>
+            <Link href='/mytank'>
               <li className='ml-10 text-sm uppercase hover:border-b'>
                 My Tank
               </li>
