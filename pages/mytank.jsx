@@ -105,6 +105,34 @@ const Mytank = () => {
             </div>
           );
         })}
+        {shrimpData.map((el, idx) => {
+          return (
+            <div key={idx} className='flex flex-col items-center'>
+              <div onClick={() => openModal(idx)} className='col-span-1 mt-8'>
+                <ShrimpItem
+                  // key={idx}
+                  image={el.image}
+                  // onClick={() => console.log('CLICK')}
+                />
+              </div>
+              <button className='mt-4'>Edit Shrimp Info</button>
+            </div>
+          );
+        })}
+        {shrimpData.map((el, idx) => {
+          return (
+            <div key={idx} className='flex flex-col items-center'>
+              <div onClick={() => openModal(idx)} className='col-span-1 mt-8'>
+                <ShrimpItem
+                  // key={idx}
+                  image={el.image}
+                  // onClick={() => console.log('CLICK')}
+                />
+              </div>
+              <button className='mt-4'>Edit Shrimp Info</button>
+            </div>
+          );
+        })}
         {/* {shrimpData.map((el, idx) => {
             return <ShrimpFeedItem key={idx} info={el} />;
           })}
