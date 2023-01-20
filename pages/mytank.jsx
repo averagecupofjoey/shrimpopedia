@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSession, signIn, signOut } from 'next-auth/react';
 import ShrimpFeedItem from '../components/ShrimpFeedItem';
-import ProfileShrimpItem from '../components/ProfileShrimpItem';
+import ShrimpItem from '../components/ShrimpItem';
 import Modal from 'react-modal';
 
 // using client side session retrieval
@@ -85,24 +85,27 @@ const Mytank = () => {
   if (!isLoading && shrimpData !== null) {
     console.log(shrimpData[0]);
     return (
-      <>
-        <div>Success, now time to do something with this data!</div>
-        <div>
-          {/* {shrimpData.map((el, idx) => {
+      <div className='grid grid-cols-1 grid-flow-row md:grid-cols-2 lg:grid-cols-3 gap-4 w-screen'>
+        {/* <div>Success, now time to do something with this data!</div> */}
+        {/* <div> */}
+        {/* {shrimpData.map((el, idx) => {
             return <ShrimpFeedItem key={idx} info={el} />;
           })} */}
-          {shrimpData.map((el, idx) => {
-            return (
-              <div key={idx} onClick={() => openModal(idx)}>
-                <ProfileShrimpItem
+        {shrimpData.map((el, idx) => {
+          return (
+            <div key={idx} className='flex flex-col items-center'>
+              <div onClick={() => openModal(idx)} className='col-span-1 mt-8'>
+                <ShrimpItem
                   // key={idx}
                   image={el.image}
                   // onClick={() => console.log('CLICK')}
                 />
               </div>
-            );
-          })}
-          {/* {shrimpData.map((el, idx) => {
+              <button className='mt-4'>Edit Shrimp Info</button>
+            </div>
+          );
+        })}
+        {/* {shrimpData.map((el, idx) => {
             return <ShrimpFeedItem key={idx} info={el} />;
           })}
           {shrimpData.map((el, idx) => {
@@ -114,7 +117,7 @@ const Mytank = () => {
           {shrimpData.map((el, idx) => {
             return <ShrimpFeedItem key={idx} info={el} />;
           })} */}
-        </div>
+        {/* </div> */}
         <Modal
           isOpen={modalIsOpen}
           onAfterOpen={afterOpenModal}
@@ -154,7 +157,7 @@ const Mytank = () => {
             </div>
           </div>
         </Modal>
-      </>
+      </div>
     );
   }
   return (

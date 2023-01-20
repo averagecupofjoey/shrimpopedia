@@ -123,12 +123,16 @@ a {
   h1 {
     @apply text-4xl sm:text-5xl md:text-6xl
   }
+
+  button {
+    @apply shadow-lg text-white bg-green-800 rounded-md p-2
+  }
 }
 
 @layer utilities {
   .notebookBody{
           background-color: #f5f5f5;
-            width: 600px;
+            width: 80vw;
             margin: 0 auto;
             padding: 0;
   }
@@ -144,7 +148,7 @@ a {
           color: #555;
             font-size: 18px;
             padding: 0 !important;
-            width: 500px;
+            width: 70vw;
             font-family: courier, monospace;
             border: 1px solid #dedede;
   }
