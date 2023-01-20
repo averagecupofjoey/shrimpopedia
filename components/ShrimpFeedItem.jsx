@@ -58,6 +58,12 @@ const ShrimpFeedItem = ({ info }) => {
               <li className='notebookli hover:notebookHover'>
                 Secondary Color: {info.colorTwo}
               </li>
+              <li className='notebookli hover:notebookHover'>
+                <div className='flex'>
+                  <div>Primary Color: {info.colorOne}</div>
+                  <div>Primary Color: {info.colorOne}</div>
+                </div>
+              </li>
               <li>
                 <img src={info.image} className='w-[200px] h-[200px]'></img>
               </li>

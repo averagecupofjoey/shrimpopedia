@@ -14,8 +14,9 @@ export default async function handle(req, res) {
         },
       },
     });
-    // console.log("HERE'S YOUR RESULT", result);
-    res.status(200).send(JSON.stringify(result));
+    // res.status(200).send(JSON.stringify(result));
+
+    res.status(200).json(result);
   } else {
     res.status(401).send({ message: 'Unauthorized' });
   }

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSession, signIn, signOut } from 'next-auth/react';
+import ShrimpFeedItem from '../components/ShrimpFeedItem';
 
 // using client side session retrieval
 const Mytank = () => {
@@ -21,10 +22,16 @@ const Mytank = () => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(body),
           });
+          console.log('RESP:', response);
           const json = await response.json();
-          console.log(json);
           setShrimpData(json);
           setLoading(false);
+          // console.log(json);
+
+          // console.log(await response.json());
+          // const res = await response.json();
+          // setShrimpData(res);
+          // setLoading(false);
         } catch (error) {
           console.log('error', error);
         }
@@ -43,9 +50,26 @@ const Mytank = () => {
 
   if (!isLoading && shrimpData !== null) {
     return (
-      <div>
+      <>
         <div>Success, now time to do something with this data!</div>
-      </div>
+        <div>
+          {shrimpData.map((el, idx) => {
+            return <ShrimpFeedItem key={idx} info={el} />;
+          })}
+          {/* {shrimpData.map((el, idx) => {
+            return <ShrimpFeedItem key={idx} info={el} />;
+          })}
+          {shrimpData.map((el, idx) => {
+            return <ShrimpFeedItem key={idx} info={el} />;
+          })}
+          {shrimpData.map((el, idx) => {
+            return <ShrimpFeedItem key={idx} info={el} />;
+          })}
+          {shrimpData.map((el, idx) => {
+            return <ShrimpFeedItem key={idx} info={el} />;
+          })} */}
+        </div>
+      </>
     );
   }
   return (
