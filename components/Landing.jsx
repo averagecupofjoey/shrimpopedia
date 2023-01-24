@@ -1,9 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import logoImage from '../public/assets/logo.png';
-import { AiOutlineMail } from 'react-icons/ai';
-import { FaGithub, FaLinkedin } from 'react-icons/fa';
-import { CgFileDocument } from 'react-icons/cg';
+import shrimpSearch from '../public/assets/shrimpSearch.png';
 
 const Landing = () => {
   return (
@@ -22,7 +20,7 @@ const Landing = () => {
       </div>
       <Image
         className='sm:w-1/2 w-[80%]'
-        src={logoImage}
+        src={shrimpSearch}
         alt='Shrimpopedia Image'
       ></Image>
     </div>
