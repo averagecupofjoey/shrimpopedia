@@ -83,7 +83,7 @@ const Mytank = () => {
   }
 
   if (!isLoading && shrimpData !== null) {
-    console.log(shrimpData[0]);
+    // console.log(shrimpData[0]);
     return (
       <div className='grid grid-cols-1 grid-flow-row md:grid-cols-2 lg:grid-cols-3 gap-4 w-screen'>
         {/* <div>Success, now time to do something with this data!</div> */}

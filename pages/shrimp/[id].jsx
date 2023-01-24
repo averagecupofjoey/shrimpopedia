@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import constructionShrimp from '../../public/assets/constructionShrimp.png';
+import Image from 'next/image';
 
 const ShrimpId = () => {
-  const [shrimpData, setShrimpData] = useState(null);
+  const [shrimpData, setShrimpData] = useState([]);
   const [isLoading, setLoading] = useState(false);
 
   const router = useRouter();
@@ -22,14 +24,23 @@ const ShrimpId = () => {
     return <div>Hey we are loading your data</div>;
   }
 
-  if (!isLoading && shrimpData === null) {
-    return <div>Nah bro, no Shrimp exists</div>;
+  if (!isLoading && shrimpData.length === 0) {
+    return (
+      <div className='flex flex-col items-center justify-center w-full'>
+        <Image
+          src={constructionShrimp}
+          alt='A Shrimp at a Construction Site'
+          className='w-[50vw] h-[50vh] rounded-md'
+        />
+        <div>Sorry, looks like that Shrimp doesn&apos;t exist!</div>
+      </div>
+    );
   }
 
   // {
   //   !shrimpData && <div>Nah bro, no Shrimp exists</div>;
   // }
-  if (!isLoading && shrimpData !== null) {
+  if (!isLoading && shrimpData.length > 0) {
     console.log('HERE', shrimpData);
     return (
       <div>
