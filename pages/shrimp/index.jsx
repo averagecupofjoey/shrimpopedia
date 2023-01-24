@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import prisma from '../lib/prisma';
-import { makeSerializable } from '../lib/util';
-import ShrimpItem from '../components/ShrimpItem';
+import prisma from '../../lib/prisma';
+import { makeSerializable } from '../../lib/util';
+import ShrimpItem from '../../components/ShrimpItem';
 import Modal from 'react-modal';
 
 const Shrimp = ({ feed }) => {
