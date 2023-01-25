@@ -8,6 +8,11 @@ import AdvancedSearchBar from '../components/AdvancedSearchBar';
 
 const Search = () => {
   const [advancedSearch, setAdvancedSearch] = useState(false);
+  const [searchResults, setSearchResults] = useState('');
+
+  const sendSearchResults = (result) => {
+    setSearchResults(result);
+  };
 
   return (
     <div className='flex flex-col items-center w-full justify-center max-h-full'>
@@ -18,10 +23,12 @@ const Search = () => {
             alt='Shrimp Search Picture'
             className='w-[40%] mt-8 mb-4 md:mt-0 '
           ></Image>
-          <SearchBar />
+          <SearchBar sendSearchResults={sendSearchResults} />
         </>
       )}
-      {advancedSearch === true && <AdvancedSearchBar />}
+      {advancedSearch === true && (
+        <AdvancedSearchBar sendSearchResults={sendSearchResults} />
+      )}
       <div
         className='text-blue-600 underline hover:cursor-pointer'
         onClick={() => {

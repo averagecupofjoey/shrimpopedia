@@ -44,18 +44,47 @@ export default async function handle(req, res) {
     }
   }
   if (req.method === 'GET') {
+    console.log('OK WE IN THIS THING', req.query);
+    const { ...args } = req.query;
+    console.log(args);
+    const filter = {
+      where: {},
+    };
+
+    if (args.species !== '') {
+      filter.where.species.equals = args.species;
+    }
+
+    if (args.name !== '') {
+      filter.where.name = args.name;
+    }
+
+    if (args.colorOne !== '') {
+      filter.where.colorOne = args.colorOne;
+    }
+
+    if (args.colorTwo !== '') {
+      filter.where.colorTwo = args.colorTwo;
+    }
+
+    if (args.morphType !== '') {
+      filter.where.morphType = args.morphType;
+    }
+
+    if (args.waterType !== '') {
+      filter.where.waterType = args.waterType;
+    }
+
+    if (args.forSale !== '') {
+      filter.where.sell = args.forSale;
+    }
+
     try {
       console.log('LOOK A GET REQUEST');
       // const { shrimpID } = req.body;
       console.log(req.query);
 
-      const result = await prisma.shrimp.findMany({
-        where: {
-          id: {
-            equals: `${shrimpID}`,
-          },
-        },
-      });
+      const result = await prisma.shrimp.findMany(filter);
       res.status(200).json(result);
     } catch (error) {
       console.log(error);

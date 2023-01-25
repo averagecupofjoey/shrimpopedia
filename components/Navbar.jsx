@@ -53,7 +53,7 @@ const Navbar = () => {
             <Link href='/shrimp'>
               <li className='ml-10 text-sm uppercase hover:border-b'>Shrimp</li>
             </Link>
-            <Link href='/#skills'>
+            <Link href='/search'>
               <li className='ml-10 text-sm uppercase hover:border-b'>Search</li>
             </Link>
             <Link href='/upload'>

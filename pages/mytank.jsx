@@ -78,6 +78,7 @@ const Mytank = () => {
     return <h1>Loading...</h1>;
   }
   if (session && shrimpData === null) {
+    console.log(session);
     setLoggedIn(true);
     setLoading(true);
   }

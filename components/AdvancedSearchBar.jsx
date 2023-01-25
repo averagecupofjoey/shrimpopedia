@@ -1,16 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-const AdvancedSearchBar = () => {
-  const [species, setSpecies] = useState();
-  const [name, setName] = useState();
-  const [colorOne, setColorOne] = useState('Red');
-  const [colorTwo, setColorTwo] = useState('N/A');
-  const [morphType, setMorphType] = useState('Solid');
-  const [waterType, setWaterType] = useState('Freshwater');
-  const [notes, setNotes] = useState('');
-  const [sell, setSell] = useState('No');
-  const [saleInfo, setSaleInfo] = useState('');
-  const [photo, setPhoto] = useState(null);
+const AdvancedSearchBar = ({ sendSearchResults }) => {
+  const [species, setSpecies] = useState('');
+  const [name, setName] = useState('');
+  const [colorOne, setColorOne] = useState('');
+  const [colorTwo, setColorTwo] = useState('');
+  const [morphType, setMorphType] = useState('');
+  const [waterType, setWaterType] = useState('');
+  const [sell, setSell] = useState('');
+
+  const [shrimpData, setShrimpData] = useState('');
+
+  useEffect(() => {
+    if (shrimpData !== '') {
+      console.log('IN USE EFFECT');
+      sendSearchResults(shrimpData);
+    }
+  }, [shrimpData, sendSearchResults]);
 
   //Form state handlers
   const handleSpecies = (e) => {
@@ -43,60 +49,37 @@ const AdvancedSearchBar = () => {
     setWaterType(e.target.value);
   };
 
-  const handleNotes = (e) => {
-    e.preventDefault();
-    setNotes(e.target.value);
-  };
-
   const handleSale = (e) => {
     e.preventDefault();
     setSell(e.target.value);
   };
 
-  const handleSaleInfo = (e) => {
+  // API Query
+  const fetchData = async (e) => {
     e.preventDefault();
-    setSaleInfo(e.target.value);
+    try {
+      const response = await fetch(
+        `/api/shrimp?species=${species}&name=${name}&colorOne=${colorOne}&colorTwo=${colorTwo}&morphType=${morphType}&waterType=${waterType}&forSale=${sell}`
+      );
+      // console.log('RESP:', response);
+      const json = await response.json();
+      setShrimpData(json);
+      setLoading(false);
+
+      sendSearchResults(shrimpData);
+      // console.log(json);
+
+      // console.log(await response.json());
+      // const res = await response.json();
+      // setShrimpData(res);
+      // setLoading(false);
+    } catch (error) {
+      console.log('error', error);
+    }
   };
+
   return (
-    <form className='bg-gray-200 rounded-md p-4'>
-      {/* <label
-        for='default-search'
-        className='mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white'
-      >
-        Search
-      </label>
-      <div className='relative'>
-        <div className='absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none'>
-          <svg
-            aria-hidden='true'
-            class='w-5 h-5 text-gray-500 dark:text-gray-400'
-            fill='none'
-            stroke='currentColor'
-            viewBox='0 0 24 24'
-            xmlns='http://www.w3.org/2000/svg'
-          >
-            <path
-              stroke-linecap='round'
-              stroke-linejoin='round'
-              stroke-width='2'
-              d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z'
-            ></path>
-          </svg>
-        </div>
-        <input
-          type='search'
-          id='default-search'
-          className='block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
-          placeholder='Search for species or name'
-          required
-        />
-        <button
-          type='submit'
-          className='text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
-        >
-          Search
-        </button>
-      </div> */}
+    <form className='bg-gray-200 rounded-md p-4' onSubmit={fetchData}>
       <div className='grid md:grid-cols-2 gap-4 w-full py-2'>
         <div className='flex flex-col'>
           <label htmlFor='species' className='uppercase text-sm py-2'>
@@ -109,6 +92,7 @@ const AdvancedSearchBar = () => {
             placeholder='e.g: Neocaridina'
             id='species'
             onChange={handleSpecies}
+            value={species}
           />
         </div>
         <div className='flex flex-col'>
@@ -122,6 +106,7 @@ const AdvancedSearchBar = () => {
             id='name'
             placeholder='e.g: Cherry Shrimp'
             onChange={handleName}
+            value={name}
           />
         </div>
       </div>
@@ -135,7 +120,9 @@ const AdvancedSearchBar = () => {
             id='colorOne'
             className='border-2 rounded-lg p-3 border-gray-300'
             onChange={handleColorOne}
+            value={colorOne}
           >
+            <option value=''>-</option>
             <option value='Red'>Red</option>
             <option value='Orange'>Orange</option>
             <option value='Yellow'>Yellow</option>
@@ -143,7 +130,6 @@ const AdvancedSearchBar = () => {
             <option value='Green'>Green</option>
             <option value='Black'>Black</option>
             <option value='White'>White</option>
-            <option value='Purple'>Purple</option>
           </select>
         </div>
         <div className='flex flex-col'>
@@ -155,7 +141,9 @@ const AdvancedSearchBar = () => {
             name='colorTwo'
             className='border-2 rounded-lg p-3 border-gray-300'
             onChange={handleColorTwo}
+            value={colorTwo}
           >
+            <option value=''>-</option>
             <option value='Red'>Red</option>
             <option value='Orange'>Orange</option>
             <option value='Yellow'>Yellow</option>
@@ -163,7 +151,6 @@ const AdvancedSearchBar = () => {
             <option value='Green'>Green</option>
             <option value='Black'>Black</option>
             <option value='White'>White</option>
-            <option value='Purple'>Purple</option>
             <option value='N/A'>N/A</option>
           </select>
         </div>
@@ -176,7 +163,9 @@ const AdvancedSearchBar = () => {
             id='morphType'
             className='border-2 rounded-lg p-3 border-gray-300'
             onChange={handleMorphType}
+            value={morphType}
           >
+            <option value=''>-</option>
             <option value='Solid'>Solid</option>
             <option value='Clear'>Clear</option>
           </select>
@@ -184,18 +173,36 @@ const AdvancedSearchBar = () => {
       </div>
       <div className='flex flex-col py-2'>
         <label htmlFor='waterType' className='uppercase text-sm py-2'>
-          Water Type?
+          Water Type
         </label>
         <select
           name='waterType'
           id='waterType'
           className='border-2 rounded-lg p-3 border-gray-300'
           onChange={handleWaterType}
+          value={waterType}
         >
+          <option value=''>-</option>
           <option value='Freshwater'>Freshwater</option>
           <option value='Saltwater'>Saltwater</option>
         </select>
       </div>
+      <div className='flex flex-col py-2'>
+        <label htmlFor='forSale' className='uppercase text-sm py-2'>
+          For Sale
+        </label>
+        <select
+          name='forSale'
+          value={sell}
+          onChange={handleSale}
+          className='border-2 rounded-lg p-3 border-gray-300'
+        >
+          <option value=''>-</option>
+          <option value='No'>No</option>
+          <option value='Yes'>Yes</option>
+        </select>
+      </div>
+      <button type='submit'>Search</button>
     </form>
   );
 };
