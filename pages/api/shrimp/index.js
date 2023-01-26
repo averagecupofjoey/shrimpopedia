@@ -76,7 +76,7 @@ export default async function handle(req, res) {
     }
 
     if (args.forSale !== '') {
-      filter.where.sell = args.forSale;
+      filter.where.sale = args.forSale;
     }
 
     try {

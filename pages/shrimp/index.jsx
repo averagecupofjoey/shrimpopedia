@@ -42,7 +42,11 @@ const Shrimp = ({ feed }) => {
         return (
           <div key={idx} className='flex flex-col items-center'>
             <div onClick={() => openModal(idx)} className='col-span-1 mt-8'>
-              <ShrimpItem image={el.image} />
+              <ShrimpItem
+                image={el.image}
+                name={el.name}
+                species={el.species}
+              />
             </div>
           </div>
         );
