@@ -47,36 +47,51 @@ export default async function handle(req, res) {
     console.log('OK WE IN THIS THING', req.query);
     const { ...args } = req.query;
     console.log(args);
+
     const filter = {
       where: {},
     };
+    if (args.search) {
+      filter.where.OR = [
+        {
+          species: {
+            contains: args.search,
+          },
+        },
+        {
+          name: {
+            contains: args.search,
+          },
+        },
+      ];
+    } else {
+      if (args.species !== '') {
+        filter.where.species.equals = args.species;
+      }
 
-    if (args.species !== '') {
-      filter.where.species.equals = args.species;
-    }
+      if (args.name !== '') {
+        filter.where.name = args.name;
+      }
 
-    if (args.name !== '') {
-      filter.where.name = args.name;
-    }
+      if (args.colorOne !== '') {
+        filter.where.colorOne = args.colorOne;
+      }
 
-    if (args.colorOne !== '') {
-      filter.where.colorOne = args.colorOne;
-    }
+      if (args.colorTwo !== '') {
+        filter.where.colorTwo = args.colorTwo;
+      }
 
-    if (args.colorTwo !== '') {
-      filter.where.colorTwo = args.colorTwo;
-    }
+      if (args.morphType !== '') {
+        filter.where.morphType = args.morphType;
+      }
 
-    if (args.morphType !== '') {
-      filter.where.morphType = args.morphType;
-    }
+      if (args.waterType !== '') {
+        filter.where.waterType = args.waterType;
+      }
 
-    if (args.waterType !== '') {
-      filter.where.waterType = args.waterType;
-    }
-
-    if (args.forSale !== '') {
-      filter.where.sale = args.forSale;
+      if (args.forSale !== '') {
+        filter.where.sale = args.forSale;
+      }
     }
 
     try {
