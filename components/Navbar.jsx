@@ -6,6 +6,7 @@ import { AiOutlineClose, AiOutlineMenu, AiOutlineMail } from 'react-icons/ai';
 import { useRouter } from 'next/router';
 // import { CgFileDocument } from 'react-icons/cg';
 import navImg from '../public/assets/logo.png';
+import shrimpopedia from '../public/assets/shrimpopedia.png';
 
 const Navbar = () => {
   const [nav, setNav] = useState(false);
@@ -43,7 +44,7 @@ const Navbar = () => {
     >
       <div className='flex justify-between items-center w-full h-full px-2 2xl:px-16'>
         <Link href='/'>
-          <Image src={navImg} alt='/' width='75' height='50' />
+          <Image src={shrimpopedia} alt='/' width='75' height='50' />
         </Link>
         <div>
           <ul style={{ color: `${linkColor}` }} className='hidden md:flex'>

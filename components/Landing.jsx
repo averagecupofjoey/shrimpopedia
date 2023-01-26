@@ -2,6 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import logoImage from '../public/assets/logo.png';
 import shrimpSearch from '../public/assets/shrimpSearch.png';
+import shrimpopedia from '../public/assets/shrimpopedia.png';
 
 const Landing = () => {
   return (
@@ -20,7 +21,7 @@ const Landing = () => {
       </div>
       <Image
         className='sm:w-1/2 w-[80%]'
-        src={shrimpSearch}
+        src={shrimpopedia}
         alt='Shrimpopedia Image'
       ></Image>
     </div>
