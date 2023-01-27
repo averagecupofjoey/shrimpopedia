@@ -65,6 +65,7 @@ const UploadForm = () => {
   const [sell, setSell] = useState('No');
   const [saleInfo, setSaleInfo] = useState('');
   const [photo, setPhoto] = useState(null);
+  const [gender, setGender] = useState('Female');
 
   //Form state handlers
   const handleSpecies = (e) => {
@@ -95,6 +96,11 @@ const UploadForm = () => {
   const handleWaterType = (e) => {
     e.preventDefault();
     setWaterType(e.target.value);
+  };
+
+  const handleGender = (e) => {
+    e.preventDefault();
+    setGender(e.target.value);
   };
 
   const handleNotes = (e) => {
@@ -196,6 +202,7 @@ const UploadForm = () => {
         colorOne,
         colorTwo,
         morphType,
+        gender,
       };
       await fetch(`/api/shrimp`, {
         method: 'POST',
@@ -371,19 +378,37 @@ const UploadForm = () => {
             </select>
           </div>
         </div>
-        <div className='flex flex-col py-2'>
-          <label htmlFor='waterType' className='uppercase text-sm py-2'>
-            Water Type?
-          </label>
-          <select
-            name='waterType'
-            id='waterType'
-            className='border-2 rounded-lg p-3 border-gray-300'
-            onChange={handleWaterType}
-          >
-            <option value='Freshwater'>Freshwater</option>
-            <option value='Saltwater'>Saltwater</option>
-          </select>
+        <div className='grid md:grid-cols-2 gap-4 w-full py-2'>
+          <div className='flex flex-col py-2'>
+            <label htmlFor='Gender' className='uppercase text-sm py-2'>
+              Gender
+            </label>
+            <select
+              name='gender'
+              id='gender'
+              className='border-2 rounded-lg p-3 border-gray-300'
+              onChange={handleGender}
+            >
+              <option value='Female'>Female</option>
+              <option value='Male'>Male</option>
+              <option value='Multi'>Multiple Shown</option>
+              <option value='Unknown'>Unknown</option>
+            </select>
+          </div>
+          <div className='flex flex-col py-2'>
+            <label htmlFor='waterType' className='uppercase text-sm py-2'>
+              Water Type
+            </label>
+            <select
+              name='waterType'
+              id='waterType'
+              className='border-2 rounded-lg p-3 border-gray-300'
+              onChange={handleWaterType}
+            >
+              <option value='Freshwater'>Freshwater</option>
+              <option value='Saltwater'>Saltwater</option>
+            </select>
+          </div>
         </div>
         <div className='flex flex-col py-2'>
           <label htmlFor='notes' className='uppercase text-sm py-2'>

@@ -19,6 +19,7 @@ export default async function handle(req, res) {
       colorOne,
       colorTwo,
       morphType,
+      gender,
     } = req.body;
 
     const session = await getSession({ req });
@@ -35,7 +36,9 @@ export default async function handle(req, res) {
           morphType: morphType,
           sale: sell,
           saleInfo: saleInfo,
+          gender,
           owner: { connect: { email: session?.user?.email } },
+          owner_id: { connect: { id: session?.user?.id } },
         },
       });
       res.json(result);

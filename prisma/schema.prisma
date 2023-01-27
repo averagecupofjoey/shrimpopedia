@@ -44,7 +44,8 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
-  shrimpies     Shrimp[]
+  UserEmail     Shrimp[] @relation("useremail")
+  userId        Shrimp[] @relation("userid")
 }
 
 model VerificationToken {
@@ -64,11 +65,14 @@ model Shrimp {
   colorOne      String
   colorTwo      String
   morphType     String
+  gender        String
   notes         String?
   sale          String
   saleInfo      String?
   createdAt     DateTime  @default(now()) @map(name: "created_at")
   updatedAt     DateTime  @updatedAt @map(name: "updated_at")
-  owner         User      @relation(fields: [ownerEmail], references: [email])
+  owner         User?      @relation("useremail", fields: [ownerEmail], references: [email])
+  owner_id      User?      @relation("userid", fields: [ownerId], references: [id] )
   ownerEmail    String
+  ownerId       String
 }
