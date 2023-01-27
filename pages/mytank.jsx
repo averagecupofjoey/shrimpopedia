@@ -3,6 +3,9 @@ import { useSession, signIn, signOut } from 'next-auth/react';
 import ShrimpFeedItem from '../components/ShrimpFeedItem';
 import ShrimpItem from '../components/ShrimpItem';
 import Modal from 'react-modal';
+import Link from 'next/link';
+import HalfGap from '../components/pageLines/HalfGap';
+import FullLine from '../components/pageLines/FullLine';
 
 // using client side session retrieval
 const Mytank = () => {
@@ -11,6 +14,7 @@ const Mytank = () => {
   const [isLoading, setLoading] = useState(false);
   const [modalInfo, setModalInfo] = useState(null);
   const [modalIsOpen, setIsOpen] = React.useState(false);
+  const [fullPageLink, setFullPageLink] = useState('');
 
   const customStyles = {
     content: {
@@ -27,8 +31,8 @@ const Mytank = () => {
   // Modal.setAppElement('#yourAppElement');
 
   function openModal(idx) {
-    console.log('IN OPEN MODAL');
     setModalInfo(shrimpData[idx]);
+    setFullPageLink(`/shrimp/${shrimpData[idx].id}`);
     setIsOpen(true);
   }
 
@@ -49,7 +53,7 @@ const Mytank = () => {
       const fetchData = async () => {
         try {
           const body = {
-            email: session.user.email,
+            id: session.user.id,
           };
           const response = await fetch(`/api/usershrimp`, {
             method: 'POST',
@@ -58,8 +62,8 @@ const Mytank = () => {
           });
           // console.log('RESP:', response);
           const json = await response.json();
-          setShrimpData(json);
           setLoading(false);
+          setShrimpData(json);
           // console.log(json);
 
           // console.log(await response.json());
@@ -93,44 +97,15 @@ const Mytank = () => {
             return <ShrimpFeedItem key={idx} info={el} />;
           })} */}
         {shrimpData.map((el, idx) => {
+          let editLink = `/shrimp/edit/${el.id}`;
           return (
             <div key={idx} className='flex flex-col items-center'>
               <div onClick={() => openModal(idx)} className='col-span-1 mt-8'>
-                <ShrimpItem
-                  // key={idx}
-                  image={el.image}
-                  // onClick={() => console.log('CLICK')}
-                />
+                <ShrimpItem image={el.image} />
               </div>
-              <button className='mt-4'>Edit Shrimp Info</button>
-            </div>
-          );
-        })}
-        {shrimpData.map((el, idx) => {
-          return (
-            <div key={idx} className='flex flex-col items-center'>
-              <div onClick={() => openModal(idx)} className='col-span-1 mt-8'>
-                <ShrimpItem
-                  // key={idx}
-                  image={el.image}
-                  // onClick={() => console.log('CLICK')}
-                />
-              </div>
-              <button className='mt-4'>Edit Shrimp Info</button>
-            </div>
-          );
-        })}
-        {shrimpData.map((el, idx) => {
-          return (
-            <div key={idx} className='flex flex-col items-center'>
-              <div onClick={() => openModal(idx)} className='col-span-1 mt-8'>
-                <ShrimpItem
-                  // key={idx}
-                  image={el.image}
-                  // onClick={() => console.log('CLICK')}
-                />
-              </div>
-              <button className='mt-4'>Edit Shrimp Info</button>
+              <Link href={editLink}>
+                <button className='mt-4'>Edit Shrimp Info</button>
+              </Link>
             </div>
           );
         })}
@@ -151,38 +126,73 @@ const Mytank = () => {
           isOpen={modalIsOpen}
           onAfterOpen={afterOpenModal}
           onRequestClose={closeModal}
-          style={customStyles}
+          // style={customStyles}
           contentLabel='Example Modal'
         >
-          <div className='notebookBody'>
-            <h4 className='notebookH4'> {modalInfo?.name || ''}</h4>
-            <div className='notebookLines'>
-              <ul className='notebookList'>
-                <li className='notebookli hover:notebookHover'>
-                  Species: {modalInfo?.species || ''}
-                </li>
-                <li className='notebookli hover:notebookHover'>
-                  Common Name: {modalInfo?.name || ''}
-                </li>
-                <li className='notebookli hover:notebookHover'>
-                  Primary Color: {modalInfo?.colorOne || ''}
-                </li>
-                <li className='notebookli hover:notebookHover'>
-                  Secondary Color: {modalInfo?.colorTwo || ''}
-                </li>
-                <li className='notebookli hover:notebookHover'>
-                  <div className='flex'>
-                    <div>Primary Color: {modalInfo?.colorOne || ''}</div>
-                    <div>Primary Color: {modalInfo?.colorOne || ''}</div>
-                  </div>
-                </li>
-                <li>
-                  <img
-                    src={modalInfo?.image || ''}
-                    className='w-[200px] h-[200px]'
-                  ></img>
-                </li>
-              </ul>
+          <div className='flex items-center justify-center  w-full pt-2 pb-2'>
+            <div className='border-2 border-blue-50 h-full w-[90vh] bg-[#f5f5f5] grid grid-cols-14 grid-rows-24 grid-flow-col '>
+              <div className='col-span-2 row-span-24 border-r-4 border-red-600 grid grid-rows-24'>
+                <div className='row-span-2 border-b-2 border-blue-500'></div>
+                {[...Array(22)].map((x, i) => (
+                  <div
+                    className='row-span-1 border-b-2 border-blue-500'
+                    key={i}
+                  ></div>
+                ))}
+              </div>
+              <div className='row-span-2 col-span-12 border-b-2 border-blue-500 flex items-end justify-center'>
+                <span className='text-3xl subpixel-antialiased font-medium'>
+                  {modalInfo?.name || ''} -
+                </span>
+                <span className='antialiased text-lg italic'>
+                  {modalInfo?.species || ''}
+                </span>
+
+                <a href={fullPageLink}>
+                  <button>Go to full page</button>
+                </a>
+              </div>
+              <HalfGap label='Water Type' value={modalInfo?.waterType || ''} />
+              <HalfGap />
+              <HalfGap
+                label='Primary Color'
+                value={modalInfo?.colorOne || ''}
+              />
+              <HalfGap />
+              <HalfGap
+                label='Secondary Color'
+                value={modalInfo?.colorTwo || ''}
+              />
+              <HalfGap />
+              <HalfGap label='Morph Type' value={modalInfo?.morphType || ''} />
+
+              <HalfGap />
+              <FullLine label='Notes' value='Pokem ipsum d.' />
+              <FullLine />
+              <FullLine />
+              <FullLine />
+              <FullLine />
+              <FullLine />
+              <FullLine />
+              <FullLine />
+              <FullLine />
+              <FullLine />
+              <FullLine />
+              <FullLine />
+              <FullLine />
+              <FullLine />
+              <div className='row-span-6 col-span-6 flex items-center justify-center bg-gray-300 border-b-2 border-blue-500'>
+                {/* <div className='w-full h-full'> */}
+                <img
+                  className='max-h-full max-w-full'
+                  src={modalInfo?.image || ''}
+                  alt='Shrimp Image'
+                  style={{ width: '100%', objectFit: 'contain' }}
+                ></img>
+                {/* </div> */}
+              </div>
+              <HalfGap label='Gender' value={modalInfo?.morphType || ''} />
+              <HalfGap />
             </div>
           </div>
         </Modal>

@@ -47,9 +47,7 @@ export default async function handle(req, res) {
     }
   }
   if (req.method === 'GET') {
-    console.log('OK WE IN THIS THING', req.query);
     const { ...args } = req.query;
-    console.log(args);
 
     const filter = {
       where: {},
@@ -98,9 +96,9 @@ export default async function handle(req, res) {
     }
 
     try {
-      console.log('LOOK A GET REQUEST');
-      // const { shrimpID } = req.body;
-      console.log(req.query);
+      // console.log('LOOK A GET REQUEST');
+      // // const { shrimpID } = req.body;
+      // console.log(req.query);
 
       const result = await prisma.shrimp.findMany(filter);
       res.status(200).json(result);

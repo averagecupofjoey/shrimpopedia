@@ -20,8 +20,8 @@ const ShrimpId = () => {
     fetch(`/api/shrimp/${id}`)
       .then((res) => res.json())
       .then((data) => {
-        setShrimpData(data);
         setLoading(false);
+        setShrimpData(data);
       });
   }, [id]);
 
@@ -46,7 +46,6 @@ const ShrimpId = () => {
   //   !shrimpData && <div>Nah bro, no Shrimp exists</div>;
   // }
   if (!isLoading && shrimpData.length > 0) {
-    console.log('HERE', shrimpData);
     return (
       <div
         className='flex items-center justify-center  w-full pt-2 pb-2'
