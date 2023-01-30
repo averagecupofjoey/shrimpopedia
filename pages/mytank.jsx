@@ -101,7 +101,11 @@ const Mytank = () => {
           return (
             <div key={idx} className='flex flex-col items-center'>
               <div onClick={() => openModal(idx)} className='col-span-1 mt-8'>
-                <ShrimpItem image={el.image} />
+                <ShrimpItem
+                  image={el.image}
+                  name={el.name}
+                  species={el.species}
+                />
               </div>
               <Link href={editLink}>
                 <button className='mt-4'>Edit Shrimp Info</button>
@@ -129,72 +133,81 @@ const Mytank = () => {
           // style={customStyles}
           contentLabel='Example Modal'
         >
-          <div className='flex items-center justify-center  w-full pt-2 pb-2'>
-            <div className='border-2 border-blue-50 h-full w-[90vh] bg-[#f5f5f5] grid grid-cols-14 grid-rows-24 grid-flow-col '>
-              <div className='col-span-2 row-span-24 border-r-4 border-red-600 grid grid-rows-24'>
-                <div className='row-span-2 border-b-2 border-blue-500'></div>
-                {[...Array(22)].map((x, i) => (
-                  <div
-                    className='row-span-1 border-b-2 border-blue-500'
-                    key={i}
-                  ></div>
-                ))}
-              </div>
-              <div className='row-span-2 col-span-12 border-b-2 border-blue-500 flex items-end justify-center'>
-                <span className='text-3xl subpixel-antialiased font-medium'>
-                  {modalInfo?.name || ''} -
-                </span>
-                <span className='antialiased text-lg italic'>
-                  {modalInfo?.species || ''}
-                </span>
+          <div style={{ height: '100%' }}></div>
+          {/* <div style={{ height: '450px' }}>
+            <div className='flex items-center justify-center  w-full pt-2 pb-2'>
+              <div className='border-2 border-blue-50 w-[90vh] bg-[#f5f5f5] grid grid-cols-14 grid-rows-24 grid-flow-col '>
+                <div className='col-span-2 row-span-24 border-r-4 border-red-600 grid grid-rows-24'>
+                  <div className='row-span-2 border-b-2 border-blue-500'></div>
+                  {[...Array(22)].map((x, i) => (
+                    <div
+                      className='row-span-1 border-b-2 border-blue-500'
+                      key={i}
+                    ></div>
+                  ))}
+                </div>
+                <div className='row-span-2 col-span-12 border-b-2 border-blue-500 flex items-end justify-center'>
+                  <span className='text-3xl subpixel-antialiased font-medium'>
+                    {modalInfo?.name || ''} -
+                  </span>
+                  <span className='antialiased text-lg italic'>
+                    {modalInfo?.species || ''}
+                  </span>
 
-                <a href={fullPageLink}>
-                  <button>Go to full page</button>
-                </a>
-              </div>
-              <HalfGap label='Water Type' value={modalInfo?.waterType || ''} />
-              <HalfGap />
-              <HalfGap
-                label='Primary Color'
-                value={modalInfo?.colorOne || ''}
-              />
-              <HalfGap />
-              <HalfGap
-                label='Secondary Color'
-                value={modalInfo?.colorTwo || ''}
-              />
-              <HalfGap />
-              <HalfGap label='Morph Type' value={modalInfo?.morphType || ''} />
+                  <a href={fullPageLink}>
+                    <button>Go to full page</button>
+                  </a>
+                </div>
+                <HalfGap
+                  label='Water Type'
+                  value={modalInfo?.waterType || ''}
+                />
+                <HalfGap />
+                <HalfGap
+                  label='Primary Color'
+                  value={modalInfo?.colorOne || ''}
+                />
+                <HalfGap />
+                <HalfGap
+                  label='Secondary Color'
+                  value={modalInfo?.colorTwo || ''}
+                />
+                <HalfGap />
+                <HalfGap
+                  label='Morph Type'
+                  value={modalInfo?.morphType || ''}
+                />
 
-              <HalfGap />
-              <FullLine label='Notes' value='Pokem ipsum d.' />
-              <FullLine />
-              <FullLine />
-              <FullLine />
-              <FullLine />
-              <FullLine />
-              <FullLine />
-              <FullLine />
-              <FullLine />
-              <FullLine />
-              <FullLine />
-              <FullLine />
-              <FullLine />
-              <FullLine />
-              <div className='row-span-6 col-span-6 flex items-center justify-center bg-gray-300 border-b-2 border-blue-500'>
-                {/* <div className='w-full h-full'> */}
-                <img
-                  className='max-h-full max-w-full'
-                  src={modalInfo?.image || ''}
-                  alt='Shrimp Image'
-                  style={{ width: '100%', objectFit: 'contain' }}
-                ></img>
-                {/* </div> */}
+                <HalfGap />
+                <FullLine label='Notes' value='Pokem ipsum d.' />
+                <FullLine />
+                <FullLine />
+                <FullLine />
+                <FullLine />
+                <FullLine />
+                <FullLine />
+                <FullLine />
+                <FullLine />
+                <FullLine />
+                <FullLine />
+                <FullLine />
+                <FullLine />
+                <FullLine />
+                <div className='row-span-6 col-span-6 flex items-center justify-center bg-gray-300 border-b-2 border-blue-500'>
+
+                  <img
+                    className='max-h-full max-w-full'
+                    src={modalInfo?.image || ''}
+                    alt='Shrimp Image'
+                    style={{ width: '100%', objectFit: 'contain' }}
+                  ></img>
+
+                </div>
+                <HalfGap label='Gender' value={modalInfo?.morphType || ''} />
+                <HalfGap />
               </div>
-              <HalfGap label='Gender' value={modalInfo?.morphType || ''} />
-              <HalfGap />
             </div>
-          </div>
+          </div> */}
         </Modal>
       </div>
     );

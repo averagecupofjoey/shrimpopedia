@@ -180,4 +180,44 @@ a {
             margin-left: 40px;
   }
 
+  .backface-visible{
+          backface-visibility: visible;
+          -webkit-backface-visibility: visible;
+          -moz-backface-visibility: visible;
+          -ms-backface-visibility: visible;
+  }
+
+  .backface-hidden{
+          backface-visibility: hidden;
+          -webkit-backface-visibility: hidden;
+          -moz-backface-visibility: hidden;
+          -ms-backface-visibility: hidden;
+  }
+
+  .card {
+    @apply w-[250px] h-[320px] sm:w-[300px] sm:h-[375px] lg:w-[325px] lg:h-[400px] rounded-md  relative
+  }
+
+  .cardBackHidden {
+    transform: perspective(1000px) rotateY(180deg);
+
+  }
+
+  .cardBackShown {
+    transform: perspective(1000px) rotateY(0deg);
+
+  }
+
+  .cardFrontShown {
+    transform: perspective(1000px) rotateY(0deg);
+  }
+
+  .cardFrontHidden {
+    transform: perspective(1000px) rotateY(-180deg)
+  }
+
 }
+
+    .cardFront, .cardBack {
+      @apply box-border rounded-md h-full w-full border-2 border-black shadow-lg shadow-black transition-transform ease-linear duration-500 absolute backface-hidden bg-[#ebf4ff]
+    }

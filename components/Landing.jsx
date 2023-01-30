@@ -19,11 +19,13 @@ const Landing = () => {
           resource for breeders to list their shrimp for sale.{' '}
         </p>
       </div>
+      {/* <div className='max-h-full max-w-full'> */}
       <Image
         className='sm:w-1/2 w-[80%]'
         src={shrimpopedia}
         alt='Shrimpopedia Image'
       ></Image>
+      {/* </div> */}
     </div>
   );
 };

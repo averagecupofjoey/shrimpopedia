@@ -106,6 +106,49 @@ export default async function handle(req, res) {
       console.log(error);
     }
   }
+  if (req.method === 'PATCH') {
+    const {
+      shrimpId,
+      name,
+      species,
+      waterType,
+      photo,
+      notes,
+      sell,
+      saleInfo,
+      colorOne,
+      colorTwo,
+      morphType,
+      gender,
+    } = req.body;
+
+    const session = await getSession({ req });
+    if (session) {
+      const result = await prisma.shrimp.update({
+        where: {
+          id: shrimpId,
+        },
+        data: {
+          name: name,
+          species: species,
+          waterType: waterType,
+          image: photo,
+          notes: notes,
+          colorOne: colorOne,
+          colorTwo: colorTwo,
+          morphType: morphType,
+          sale: sell,
+          saleInfo: saleInfo,
+          gender,
+          owner: { connect: { email: session?.user?.email } },
+          owner_id: { connect: { id: session?.user?.id } },
+        },
+      });
+      res.json(result);
+    } else {
+      res.status(401).send({ message: 'Unauthorized' });
+    }
+  }
 }
 
 // model Shrimp {

@@ -5,10 +5,13 @@ import Image from 'next/image';
 
 import HalfGap from '../../components/pageLines/HalfGap';
 import FullLine from '../../components/pageLines/FullLine';
+import useDimensions from 'react-use-dimensions';
 
 const ShrimpId = () => {
   const [shrimpData, setShrimpData] = useState([]);
-  const [isLoading, setLoading] = useState(false);
+  const [isLoading, setLoading] = useState(true);
+
+  const [ref, { height }] = useDimensions();
 
   const router = useRouter();
   const { id } = router.query;
@@ -47,10 +50,7 @@ const ShrimpId = () => {
   // }
   if (!isLoading && shrimpData.length > 0) {
     return (
-      <div
-        className='flex items-center justify-center  w-full pt-2 pb-2'
-        ref={pageRef}
-      >
+      <div className='flex items-center justify-center  w-full pt-2 pb-2'>
         <div className='border-2 border-blue-50 h-full w-[90vh] bg-[#f5f5f5] grid grid-cols-14 grid-rows-24 grid-flow-col '>
           <div className='col-span-2 row-span-24 border-r-4 border-red-600 grid grid-rows-24'>
             <div className='row-span-2 border-b-2 border-blue-500'></div>
@@ -69,7 +69,12 @@ const ShrimpId = () => {
               {shrimpData[0].species}
             </span>
           </div>
-          <HalfGap label='Water Type' value={shrimpData[0].waterType} />
+          <HalfGap
+            ref={ref}
+            label='Water Type'
+            value={shrimpData[0].waterType}
+            height={height}
+          />
           <HalfGap />
           <HalfGap label='Primary Color' value={shrimpData[0].colorOne} />
           <HalfGap />
@@ -81,6 +86,7 @@ const ShrimpId = () => {
           <FullLine
             label='Notes'
             value='Pokem ipsum dolor sit amet Hitmonchan Hidden Machine Jellicent Gary Smeargle Vulpix. Mewtwo Strikes Back Relicanth Mesprit Slowpoke Happiny Cacnea Flygon. Normal Crustle Darumaka Whiscash Mandibuzz Dewgong Elgyem. Sand-Attack Swadloon Kingdra Kanto Whismur Glitch City quis nostrud exercitation. Duis aute irure dolor in reprehenderit in voluptate Pupitar Uxie Hoothoot Pignite Pachirisu Muk.'
+            height={height}
           />
           <FullLine />
           <FullLine />

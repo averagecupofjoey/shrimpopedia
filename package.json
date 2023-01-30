@@ -31,7 +31,8 @@
     "react-filepond": "^7.1.2",
     "react-icons": "^4.7.1",
     "react-image-file-resizer": "^0.4.8",
-    "react-modal": "^3.16.1"
+    "react-modal": "^3.16.1",
+    "react-use-dimensions": "^1.2.1"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.13",
