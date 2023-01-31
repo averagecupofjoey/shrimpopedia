@@ -105,14 +105,40 @@ const ShrimpId = () => {
           <FullLine />
           <FullLine />
           <FullLine />
-          <div className='row-span-6 col-span-6 flex items-center justify-center bg-gray-300 border-b-2 border-blue-500'>
+          <div className='row-span-6 col-span-6 flex items-center justify-center relative'>
+            <img
+              className='max-h-full max-w-full absolute pb-1'
+              src={shrimpData.image}
+              alt='Shrimp Image'
+              style={{ width: '100%', objectFit: 'contain' }}
+            ></img>
+            <div className='grid grid-cols-6 grid-rows-6 grid-flow-col w-full h-full'>
+              <HalfGap />
+              <HalfGap />
+              <HalfGap />
+              <HalfGap />
+              <HalfGap />
+              <HalfGap />
+
+              {/* <HalfGap />
+              <div className='row-span-1 col-span-6 border-b-2 border-blue-500' />
+              <div className='row-span-1 col-span-6 border-b-2 border-blue-500' />
+              <div className='row-span-1 col-span-6 after:bottom-[-2px] after:border-b-2 after:border-blue-500' />
+              <div className='row-span-1 col-span-6 after:bottom-[-2px] after:border-b-2 after:border-blue-500' /> */}
+            </div>
             {/* <div className='w-full h-full'> */}
+            {/* <HalfGap />
+            <HalfGap />
+            <HalfGap />
+            <HalfGap />
+            <HalfGap />
+            <HalfGap />
             <img
               className='max-h-full max-w-full'
               src={shrimpData.image}
               alt='Shrimp Image'
               style={{ width: '100%', objectFit: 'contain' }}
-            ></img>
+            ></img> */}
             {/* </div> */}
           </div>
           <HalfGap label='Gender' value='Male' />
