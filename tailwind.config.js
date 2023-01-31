@@ -6,6 +6,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        'gloria-hallelujah': ['"Gloria Hallelujah"', 'cursive'],
+      },
       screens: {
         widescreen: { raw: '(min-aspect-ratio: 3/2)' },
         tallscreen: { raw: '(max-aspect-ratio: 65/100)' },

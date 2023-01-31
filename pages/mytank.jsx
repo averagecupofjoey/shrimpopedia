@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useSession, signIn, signOut } from 'next-auth/react';
 import ShrimpItem from '../components/ShrimpItem';
 import Link from 'next/link';
+import spinner from '../public/assets/spinner.svg';
+import Image from 'next/image';
 
 // using client side session retrieval
 const Mytank = () => {
@@ -42,7 +44,16 @@ const Mytank = () => {
   }, [isLoggedIn]);
 
   if (status === 'loading' || isLoading) {
-    return <h1>Loading...</h1>;
+    return (
+      <div className='flex flex-col items-center justify-center w-full h-full'>
+        <Image
+          src={spinner}
+          alt='Loading Image'
+          className='w-[50vw] h-[50vh] rounded-md animate-spin'
+        ></Image>
+        <h1>Loading your data</h1>
+      </div>
+    );
   }
   if (session && shrimpData === null) {
     setLoggedIn(true);
