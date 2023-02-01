@@ -265,7 +265,7 @@ const UploadForm = () => {
         <button onClick={closeModal}>Use this image</button>
       </Modal>
 
-      <form onSubmit={submitData} encType='text/plain'>
+      <form onSubmit={submitData} encType='text/plain' className='max-w-full'>
         <div className='fileInput flex flex-col items-center'>
           <label htmlFor='image_upload'>
             Choose image to upload (PNG, JPG)
@@ -293,6 +293,7 @@ const UploadForm = () => {
             ></img>
           </div>
         )}
+
         <div className='grid md:grid-cols-2 gap-4 w-full py-2'>
           <div className='flex flex-col'>
             <label htmlFor='species' className='uppercase text-sm py-2'>
