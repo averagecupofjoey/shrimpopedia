@@ -138,66 +138,75 @@ const Navbar = () => {
 
           <div className='py-4 flex flex-col'>
             <ul className='uppercase text-hoverbase'>
-              <section className='flex items-baseline'>
-                <Link href='/'>
+              <a href='/'>
+                {/* <Link href='/'> */}
+                <section className='flex items-baseline active:bg-gray-700 rounded-md'>
                   <li onClick={() => setNav(false)} className='py-4 text-sm'>
                     Home
                   </li>
-                </Link>
-
-                <span className='flex overflow-hidden tracking-widest'>
-                  .............................................................................................................
-                </span>
-                <h3>1</h3>
-              </section>
-              <section className='flex items-baseline'>
-                <Link href='/shrimp'>
+                  <span className='flex overflow-hidden tracking-widest'>
+                    .............................................................................................................
+                  </span>
+                  <h3>1</h3>
+                </section>
+                {/* </Link> */}
+              </a>
+              <a href='/shrimp'>
+                <section className='flex items-baseline active:bg-gray-700 rounded-md'>
+                  {/* <Link href='/shrimp'> */}
                   <li onClick={() => setNav(false)} className='py-4 text-sm'>
                     Shrimp
                   </li>
-                </Link>
+                  {/* </Link> */}
+                  <span className='flex overflow-hidden tracking-widest'>
+                    .............................................................................................................
+                  </span>
+                  <h3>2</h3>
+                </section>
+              </a>
 
-                <span className='flex overflow-hidden tracking-widest'>
-                  .............................................................................................................
-                </span>
-                <h3>2</h3>
-              </section>
-              <section className='flex items-baseline'>
-                <Link href='/search'>
+              <a href='/search'>
+                <section className='flex items-baseline active:bg-gray-700 rounded-md'>
+                  {/* <Link href='/search'> */}
                   <li onClick={() => setNav(false)} className='py-4 text-sm'>
                     Search
                   </li>
-                </Link>
+                  {/* </Link> */}
 
-                <span className='flex overflow-hidden tracking-widest'>
-                  .............................................................................................................
-                </span>
-                <h3>3</h3>
-              </section>
-              <section className='flex items-baseline'>
-                <Link href='/upload'>
+                  <span className='flex overflow-hidden tracking-widest'>
+                    .............................................................................................................
+                  </span>
+                  <h3>3</h3>
+                </section>
+              </a>
+
+              <a href='/upload'>
+                <section className='flex items-baseline active:bg-gray-700 rounded-md'>
+                  {/* <Link href='/upload'> */}
                   <li onClick={() => setNav(false)} className='py-4 text-sm'>
                     Upload
                   </li>
-                </Link>
+                  {/* </Link> */}
+                  <span className='flex overflow-hidden tracking-widest'>
+                    .............................................................................................................
+                  </span>
+                  <h3>4</h3>
+                </section>
+              </a>
 
-                <span className='flex overflow-hidden tracking-widest'>
-                  .............................................................................................................
-                </span>
-                <h3>4</h3>
-              </section>
-              <section className='flex items-baseline'>
-                <Link href='/'>
+              <a href='/'>
+                <section className='flex items-baseline active:bg-gray-700 rounded-md'>
+                  {/* <Link href='/'> */}
                   <li onClick={() => setNav(false)} className='py-4 text-sm'>
                     Resources
                   </li>
-                </Link>
-
-                <span className='flex overflow-hidden tracking-widest'>
-                  .............................................................................................................
-                </span>
-                <h3>5</h3>
-              </section>
+                  {/* </Link> */}
+                  <span className='flex overflow-hidden tracking-widest'>
+                    .............................................................................................................
+                  </span>
+                  <h3>5</h3>
+                </section>
+              </a>
               {/* <Link href='/shrimp'>
                 <li onClick={() => setNav(false)} className='py-4 text-sm'>
                   Shrimp
