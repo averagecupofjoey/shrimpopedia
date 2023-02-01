@@ -2,40 +2,40 @@ import React, { useState } from 'react';
 import prisma from '../../lib/prisma';
 import { makeSerializable } from '../../lib/util';
 import ShrimpItem from '../../components/ShrimpItem';
-import Modal from 'react-modal';
+// import Modal from 'react-modal';
 
 const Shrimp = ({ feed }) => {
-  const [modalInfo, setModalInfo] = useState(null);
-  const [modalIsOpen, setIsOpen] = React.useState(false);
+  // const [modalInfo, setModalInfo] = useState(null);
+  // const [modalIsOpen, setIsOpen] = React.useState(false);
 
-  const customStyles = {
-    content: {
-      top: '50%',
-      left: '50%',
-      right: 'auto',
-      bottom: 'auto',
-      marginRight: '-50%',
-      transform: 'translate(-50%, -50%)',
-    },
-  };
+  // const customStyles = {
+  //   content: {
+  //     top: '50%',
+  //     left: '50%',
+  //     right: 'auto',
+  //     bottom: 'auto',
+  //     marginRight: '-50%',
+  //     transform: 'translate(-50%, -50%)',
+  //   },
+  // };
 
   // Make sure to bind modal to your appElement (https://reactcommunity.org/react-modal/accessibility/)
   // Modal.setAppElement('#yourAppElement');
 
-  function openModal(idx) {
-    setModalInfo(feed[idx]);
-    setIsOpen(true);
-  }
+  // function openModal(idx) {
+  //   setModalInfo(feed[idx]);
+  //   setIsOpen(true);
+  // }
 
-  function afterOpenModal() {
-    // references are now sync'd and can be accessed.
-    // subtitle.style.color = '#f00';
-    //we put the image here?
-  }
+  // function afterOpenModal() {
+  //   // references are now sync'd and can be accessed.
+  //   // subtitle.style.color = '#f00';
+  //   //we put the image here?
+  // }
 
-  function closeModal() {
-    setIsOpen(false);
-  }
+  // function closeModal() {
+  //   setIsOpen(false);
+  // }
   return (
     <div className='grid grid-cols-1 grid-flow-row md:grid-cols-2 lg:grid-cols-3 gap-4 w-screen'>
       {feed.map((el, idx) => {
@@ -47,7 +47,7 @@ const Shrimp = ({ feed }) => {
           </div>
         );
       })}
-      <Modal
+      {/* <Modal
         isOpen={modalIsOpen}
         onAfterOpen={afterOpenModal}
         onRequestClose={closeModal}
@@ -85,7 +85,7 @@ const Shrimp = ({ feed }) => {
             </ul>
           </div>
         </div>
-      </Modal>
+      </Modal> */}
     </div>
   );
 };

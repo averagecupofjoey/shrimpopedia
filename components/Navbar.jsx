@@ -7,6 +7,7 @@ import { useRouter } from 'next/router';
 // import { CgFileDocument } from 'react-icons/cg';
 import navImg from '../public/assets/logo.png';
 import shrimpopedia from '../public/assets/shrimpopedia.png';
+import blueShrimp from '../public/assets/loading.png';
 
 const Navbar = () => {
   const [nav, setNav] = useState(false);
@@ -91,14 +92,29 @@ const Navbar = () => {
           nav ? 'md:hidden fixed left-0 top-0 w-full h-screen bg-black/70' : ''
         }
       >
+        {/* <div className={nav ? '' : 'fixed top-0'}> */}
         <div
           className={
             nav
-              ? 'fixed left-0 top-0 w-[75%] sm:w-[60%] md:w-[45%] h-screen bg-badgebase p-10 ease-in duration-500'
-              : 'fixed left-[-100%] top-0 p-10 ease-in duration-500'
+              ? 'fixed left-0 top-0 w-full h-screen p-10 ease-in-out duration-500 bg-[#f5f5f5]'
+              : 'fixed left-[-100%] h-screen w-full top-0 p-10 ease-in duration-700'
           }
         >
-          <div>
+          <div
+            onClick={handleNav}
+            className='rounded-full shadow-lg shadow-black p-3 cursor-pointer absolute top-3 right-3'
+          >
+            <AiOutlineClose />
+          </div>
+          <div className='flex flex-col items-center justify-center w-full'>
+            <Image src={blueShrimp} alt='/' className='max-w-[50%]' />
+            <div className='border-b border-gray-300'>
+              <p className='w-full md:w-[90%] pb-4 text-hoverbase'>
+                TABLE OF CONTENTS
+              </p>
+            </div>
+          </div>
+          {/* <div>
             <div className='flex w-full items-center justify-between'>
               <Link href='/'>
                 <Image
@@ -116,29 +132,83 @@ const Navbar = () => {
               </div>
             </div>
             <div className='border-b border-gray-300 my-4'>
-              <p className='w-[85%] md:w-[90%] py-4 text-hoverbase'>
-                Where to?
-              </p>
+              <p className='w-[85%] md:w-[90%] py-4 text-hoverbase'>CONTENTS</p>
             </div>
-          </div>
+          </div> */}
+
           <div className='py-4 flex flex-col'>
             <ul className='uppercase text-hoverbase'>
-              <Link href='/'>
-                <li onClick={() => setNav(false)} className='py-4 text-sm'>
-                  Home
-                </li>
-              </Link>
-              <Link href='/#about'>
+              <section className='flex items-baseline'>
+                <Link href='/'>
+                  <li onClick={() => setNav(false)} className='py-4 text-sm'>
+                    Home
+                  </li>
+                </Link>
+
+                <span className='flex overflow-hidden tracking-widest'>
+                  .............................................................................................................
+                </span>
+                <h3>1</h3>
+              </section>
+              <section className='flex items-baseline'>
+                <Link href='/shrimp'>
+                  <li onClick={() => setNav(false)} className='py-4 text-sm'>
+                    Shrimp
+                  </li>
+                </Link>
+
+                <span className='flex overflow-hidden tracking-widest'>
+                  .............................................................................................................
+                </span>
+                <h3>2</h3>
+              </section>
+              <section className='flex items-baseline'>
+                <Link href='/search'>
+                  <li onClick={() => setNav(false)} className='py-4 text-sm'>
+                    Search
+                  </li>
+                </Link>
+
+                <span className='flex overflow-hidden tracking-widest'>
+                  .............................................................................................................
+                </span>
+                <h3>3</h3>
+              </section>
+              <section className='flex items-baseline'>
+                <Link href='/upload'>
+                  <li onClick={() => setNav(false)} className='py-4 text-sm'>
+                    Upload
+                  </li>
+                </Link>
+
+                <span className='flex overflow-hidden tracking-widest'>
+                  .............................................................................................................
+                </span>
+                <h3>4</h3>
+              </section>
+              <section className='flex items-baseline'>
+                <Link href='/'>
+                  <li onClick={() => setNav(false)} className='py-4 text-sm'>
+                    Resources
+                  </li>
+                </Link>
+
+                <span className='flex overflow-hidden tracking-widest'>
+                  .............................................................................................................
+                </span>
+                <h3>5</h3>
+              </section>
+              {/* <Link href='/shrimp'>
                 <li onClick={() => setNav(false)} className='py-4 text-sm'>
                   Shrimp
                 </li>
               </Link>
-              <Link href='/#skills'>
+              <Link href='/search'>
                 <li onClick={() => setNav(false)} className='py-4 text-sm'>
                   Search
                 </li>
               </Link>
-              <Link href='/#projects'>
+              <Link href='/upload'>
                 <li onClick={() => setNav(false)} className='py-4 text-sm'>
                   Upload
                 </li>
@@ -147,51 +217,12 @@ const Navbar = () => {
                 <li onClick={() => setNav(false)} className='py-4 text-sm'>
                   Resources
                 </li>
-              </Link>
+              </Link> */}
             </ul>
-
-            {/* <div className='pt-10 sm:pt-20 md:pt-30 '>
-              <p className='uppercase tracking-widest text-hoverbase'>
-                Connect with me
-              </p>
-              <div className='flex items-center justify-between my-4 w-full sm:w-[80%]'>
-                <a
-                  target='_blank'
-                  rel='noreferrer'
-                  href='https://www.linkedin.com/in/josephelias/'
-                >
-                  <div className='rounded-full shadow-lg shadow-gray-400 p-3 cursor-pointe hover:scale-105 ease-in duration-300'>
-                    <FaLinkedinIn />
-                  </div>
-                </a>
-                <a
-                  target='_blank'
-                  rel='noreferrer'
-                  href='https://github.com/averagecupofjoey'
-                >
-                  <div className='rounded-full shadow-lg shadow-gray-400 p-3 cursor-pointe hover:scale-105 ease-in duration-300 ml-3'>
-                    <FaGithub />
-                  </div>
-                </a>
-                <a href='mailto:jrelias@outlook.com'>
-                  <div className='rounded-full shadow-lg shadow-gray-400 p-3 cursor-pointe hover:scale-105 ease-in duration-300 ml-3'>
-                    <AiOutlineMail />
-                  </div>
-                </a>
-                <a
-                  target='_blank'
-                  rel='noreferrer'
-                  href='https://drive.google.com/file/d/19JWFzMRUAnTzl12Opq0a34gIZcRg3JUa/view'
-                >
-                  <div className='rounded-full shadow-lg shadow-gray-400 p-3 cursor-pointe hover:scale-105 ease-in duration-300 ml-3'>
-                    <CgFileDocument />
-                  </div>
-                </a>
-              </div> */}
-            {/* </div> */}
           </div>
         </div>
       </div>
+      {/* </div> */}
     </div>
   );
 };
