@@ -11,13 +11,15 @@ const Upload = () => {
   }
   if (session) {
     return (
-      <div className='max-w-[1240px] w-full h-full mx-auto p-2 flex flex-col items-center bg-slate-500'>
-        Welcome {session.user?.email}! <br />
-        <p>Use the below form to upload an entry into Shrimpopedia</p>
+      <div className='max-w-[1240px] w-full h-full mx-auto p-2 flex flex-col items-center'>
+        <p className='mb-2'>
+          Welcome {session.user?.email}! <br />
+        </p>
+        {/* <p>Use the below form to upload an entry into Shrimpopedia</p> */}
         <UploadForm />
-        <button type='button' onClick={() => signOut()}>
+        {/* <button type='button' onClick={() => signOut()}>
           Sign out
-        </button>
+        </button> */}
       </div>
     );
   }

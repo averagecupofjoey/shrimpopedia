@@ -62,20 +62,29 @@ const Mytank = () => {
 
   if (!isLoading && shrimpData !== null) {
     return (
-      <div className='grid grid-cols-1 grid-flow-row md:grid-cols-2 lg:grid-cols-3 gap-4 w-screen'>
-        {shrimpData.map((el, idx) => {
-          let editLink = `/shrimp/edit/${el.id}`;
-          return (
-            <div key={idx} className='flex flex-col items-center'>
-              <div className='col-span-1 mt-8'>
-                <ShrimpItem data={el} />
+      <div className='flex flex-col items-center'>
+        <div>Welcome {session.user?.email}!</div>
+        <div>
+          Not you?{' '}
+          <button type='button' onClick={() => signOut()}>
+            Sign Out
+          </button>
+        </div>
+        <div className='grid grid-cols-1 grid-flow-row md:grid-cols-2 lg:grid-cols-3 gap-4 w-screen'>
+          {shrimpData.map((el, idx) => {
+            let editLink = `/shrimp/edit/${el.id}`;
+            return (
+              <div key={idx} className='flex flex-col items-center'>
+                <div className='col-span-1 mt-8'>
+                  <ShrimpItem data={el} />
+                </div>
+                <Link href={editLink}>
+                  <button className='mt-4'>Edit Shrimp Info</button>
+                </Link>
               </div>
-              <Link href={editLink}>
-                <button className='mt-4'>Edit Shrimp Info</button>
-              </Link>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
     );
   }

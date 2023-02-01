@@ -265,12 +265,17 @@ const UploadForm = () => {
         <button onClick={closeModal}>Use this image</button>
       </Modal>
 
-      <form onSubmit={submitData} encType='text/plain' className='max-w-full'>
-        <div className='fileInput flex flex-col items-center'>
+      <form
+        onSubmit={submitData}
+        encType='text/plain'
+        className='max-w-full flex flex-col items-center'
+      >
+        <div className='fileInput flex flex-col items-center justify-center'>
           <label htmlFor='image_upload'>
             Choose image to upload (PNG, JPG)
           </label>
           <input
+            className='w-auto my-2'
             type='file'
             id='image_upload'
             name='image_upload'
@@ -281,185 +286,186 @@ const UploadForm = () => {
           />
         </div>
         {photo !== null && (
-          <div className='previewContainer w-[400px] h-[400px] flex items-center justify-center'>
-            {/* <div>
+          <>
+            <div className='previewContainer max-w-[400px] max-h-[400px] flex items-center justify-center'>
+              {/* <div>
             <img src={imagePreview} id='image'></img>
           </div> */}
-            <img
-              src={photo}
-              id='output'
-              className='h-full w-full'
-              alt='shrimp pic'
-            ></img>
-          </div>
+              <img
+                src={photo}
+                id='output'
+                className='h-full w-full'
+                alt='shrimp pic'
+              ></img>
+            </div>
+            <div className='grid md:grid-cols-2 gap-4 w-full py-2'>
+              <div className='flex flex-col'>
+                <label htmlFor='species' className='uppercase text-sm py-2'>
+                  Scientific Name
+                </label>
+                <input
+                  className='border-2 rounded-lg p-3 flex border-gray-300'
+                  type='text'
+                  name='species'
+                  placeholder='e.g: Neocaridina'
+                  id='species'
+                  onChange={handleSpecies}
+                />
+              </div>
+              <div className='flex flex-col'>
+                <label htmlFor='name' className='uppercase text-sm py-2'>
+                  Common Name
+                </label>
+                <input
+                  className='border-2 rounded-lg p-3 flex border-gray-300'
+                  type='text'
+                  name='name'
+                  id='name'
+                  placeholder='e.g: Cherry Shrimp'
+                  onChange={handleName}
+                />
+              </div>
+            </div>
+            <div className='grid md:grid-cols-3 gap-4 w-full py-2'>
+              <div className='flex flex-col'>
+                <label htmlFor='colorOne' className='uppercase text-sm py-2'>
+                  Primary Color
+                </label>
+                <select
+                  name='colorOne'
+                  id='colorOne'
+                  className='border-2 rounded-lg p-3 border-gray-300'
+                  onChange={handleColorOne}
+                >
+                  <option value='Red'>Red</option>
+                  <option value='Orange'>Orange</option>
+                  <option value='Yellow'>Yellow</option>
+                  <option value='Blue'>Blue</option>
+                  <option value='Green'>Green</option>
+                  <option value='Black'>Black</option>
+                  <option value='White'>White</option>
+                  <option value='Purple'>Purple</option>
+                </select>
+              </div>
+              <div className='flex flex-col'>
+                <label htmlFor='colorTwo' className='uppercase text-sm py-2'>
+                  Secondary Color
+                </label>
+                <select
+                  id='colorTwo'
+                  name='colorTwo'
+                  className='border-2 rounded-lg p-3 border-gray-300'
+                  onChange={handleColorTwo}
+                >
+                  <option value='Red'>Red</option>
+                  <option value='Orange'>Orange</option>
+                  <option value='Yellow'>Yellow</option>
+                  <option value='Blue'>Blue</option>
+                  <option value='Green'>Green</option>
+                  <option value='Black'>Black</option>
+                  <option value='White'>White</option>
+                  <option value='Purple'>Purple</option>
+                  <option value='N/A'>N/A</option>
+                </select>
+              </div>
+              <div className='flex flex-col'>
+                <label htmlFor='morphType' className='uppercase text-sm py-2'>
+                  Morph Type
+                </label>
+                <select
+                  name='morphType'
+                  id='morphType'
+                  className='border-2 rounded-lg p-3 border-gray-300'
+                  onChange={handleMorphType}
+                >
+                  <option value='Solid'>Solid</option>
+                  <option value='Clear'>Clear</option>
+                </select>
+              </div>
+            </div>
+            <div className='grid md:grid-cols-2 gap-4 w-full py-2'>
+              <div className='flex flex-col py-2'>
+                <label htmlFor='Gender' className='uppercase text-sm py-2'>
+                  Gender
+                </label>
+                <select
+                  name='gender'
+                  id='gender'
+                  className='border-2 rounded-lg p-3 border-gray-300'
+                  onChange={handleGender}
+                >
+                  <option value='Female'>Female</option>
+                  <option value='Male'>Male</option>
+                  <option value='Multi'>Multiple Shown</option>
+                  <option value='Unknown'>Unknown</option>
+                </select>
+              </div>
+              <div className='flex flex-col py-2'>
+                <label htmlFor='waterType' className='uppercase text-sm py-2'>
+                  Water Type
+                </label>
+                <select
+                  name='waterType'
+                  id='waterType'
+                  className='border-2 rounded-lg p-3 border-gray-300'
+                  onChange={handleWaterType}
+                >
+                  <option value='Freshwater'>Freshwater</option>
+                  <option value='Saltwater'>Saltwater</option>
+                </select>
+              </div>
+            </div>
+            <div className='flex flex-col py-2 min-w-full'>
+              <label htmlFor='notes' className='uppercase text-sm py-2'>
+                Notes
+              </label>
+              <textarea
+                className='border-2 rounded-lg p-3 border-gray-300'
+                rows='5'
+                name='notes'
+                id='notes'
+                placeholder='Add any interesting notes that you want to about this species here!'
+                onChange={handleNotes}
+              ></textarea>
+            </div>
+            <div className='flex flex-col py-2 min-w-full'>
+              <label htmlFor='forSale' className='uppercase text-sm py-2'>
+                For Sale?
+              </label>
+              <select
+                name='forSale'
+                value={sell}
+                onChange={handleSale}
+                className='border-2 rounded-lg p-3 border-gray-300'
+              >
+                <option value='No'>No</option>
+                <option value='Yes'>Yes</option>
+              </select>
+            </div>
+            {sell === 'Yes' && (
+              <div className='flex flex-col py-2 min-w-full'>
+                <label htmlFor='saleInfo' className='uppercase text-sm py-2'>
+                  Sale Info
+                </label>
+                <textarea
+                  className='border-2 rounded-lg p-3 border-gray-300'
+                  rows='5'
+                  name='saleInfo'
+                  placeholder='Add your sale inquery contact information'
+                  onChange={handleSaleInfo}
+                ></textarea>
+              </div>
+            )}
+            <button
+              className='w-full p-4 mt-4 text-gray-100 bg-slate-500 hover:text-gray-800'
+              // disabled={!photo || !species || !name}
+              // disabled={true}
+              type='submit'
+            >
+              Add to Shrimpopedia!
+            </button>
+          </>
         )}
-
-        <div className='grid md:grid-cols-2 gap-4 w-full py-2'>
-          <div className='flex flex-col'>
-            <label htmlFor='species' className='uppercase text-sm py-2'>
-              Scientific Name
-            </label>
-            <input
-              className='border-2 rounded-lg p-3 flex border-gray-300'
-              type='text'
-              name='species'
-              placeholder='e.g: Neocaridina'
-              id='species'
-              onChange={handleSpecies}
-            />
-          </div>
-          <div className='flex flex-col'>
-            <label htmlFor='name' className='uppercase text-sm py-2'>
-              Common Name
-            </label>
-            <input
-              className='border-2 rounded-lg p-3 flex border-gray-300'
-              type='text'
-              name='name'
-              id='name'
-              placeholder='e.g: Cherry Shrimp'
-              onChange={handleName}
-            />
-          </div>
-        </div>
-        <div className='grid md:grid-cols-3 gap-4 w-full py-2'>
-          <div className='flex flex-col'>
-            <label htmlFor='colorOne' className='uppercase text-sm py-2'>
-              Primary Color
-            </label>
-            <select
-              name='colorOne'
-              id='colorOne'
-              className='border-2 rounded-lg p-3 border-gray-300'
-              onChange={handleColorOne}
-            >
-              <option value='Red'>Red</option>
-              <option value='Orange'>Orange</option>
-              <option value='Yellow'>Yellow</option>
-              <option value='Blue'>Blue</option>
-              <option value='Green'>Green</option>
-              <option value='Black'>Black</option>
-              <option value='White'>White</option>
-              <option value='Purple'>Purple</option>
-            </select>
-          </div>
-          <div className='flex flex-col'>
-            <label htmlFor='colorTwo' className='uppercase text-sm py-2'>
-              Secondary Color
-            </label>
-            <select
-              id='colorTwo'
-              name='colorTwo'
-              className='border-2 rounded-lg p-3 border-gray-300'
-              onChange={handleColorTwo}
-            >
-              <option value='Red'>Red</option>
-              <option value='Orange'>Orange</option>
-              <option value='Yellow'>Yellow</option>
-              <option value='Blue'>Blue</option>
-              <option value='Green'>Green</option>
-              <option value='Black'>Black</option>
-              <option value='White'>White</option>
-              <option value='Purple'>Purple</option>
-              <option value='N/A'>N/A</option>
-            </select>
-          </div>
-          <div className='flex flex-col'>
-            <label htmlFor='morphType' className='uppercase text-sm py-2'>
-              Morph Type
-            </label>
-            <select
-              name='morphType'
-              id='morphType'
-              className='border-2 rounded-lg p-3 border-gray-300'
-              onChange={handleMorphType}
-            >
-              <option value='Solid'>Solid</option>
-              <option value='Clear'>Clear</option>
-            </select>
-          </div>
-        </div>
-        <div className='grid md:grid-cols-2 gap-4 w-full py-2'>
-          <div className='flex flex-col py-2'>
-            <label htmlFor='Gender' className='uppercase text-sm py-2'>
-              Gender
-            </label>
-            <select
-              name='gender'
-              id='gender'
-              className='border-2 rounded-lg p-3 border-gray-300'
-              onChange={handleGender}
-            >
-              <option value='Female'>Female</option>
-              <option value='Male'>Male</option>
-              <option value='Multi'>Multiple Shown</option>
-              <option value='Unknown'>Unknown</option>
-            </select>
-          </div>
-          <div className='flex flex-col py-2'>
-            <label htmlFor='waterType' className='uppercase text-sm py-2'>
-              Water Type
-            </label>
-            <select
-              name='waterType'
-              id='waterType'
-              className='border-2 rounded-lg p-3 border-gray-300'
-              onChange={handleWaterType}
-            >
-              <option value='Freshwater'>Freshwater</option>
-              <option value='Saltwater'>Saltwater</option>
-            </select>
-          </div>
-        </div>
-        <div className='flex flex-col py-2'>
-          <label htmlFor='notes' className='uppercase text-sm py-2'>
-            Notes
-          </label>
-          <textarea
-            className='border-2 rounded-lg p-3 border-gray-300'
-            rows='5'
-            name='notes'
-            id='notes'
-            placeholder='Add any interesting notes that you want to about this species here!'
-            onChange={handleNotes}
-          ></textarea>
-        </div>
-        <div className='flex flex-col py-2'>
-          <label htmlFor='forSale' className='uppercase text-sm py-2'>
-            For Sale?
-          </label>
-          <select
-            name='forSale'
-            value={sell}
-            onChange={handleSale}
-            className='border-2 rounded-lg p-3 border-gray-300'
-          >
-            <option value='No'>No</option>
-            <option value='Yes'>Yes</option>
-          </select>
-        </div>
-        {sell === 'Yes' && (
-          <div className='flex flex-col py-2'>
-            <label htmlFor='saleInfo' className='uppercase text-sm py-2'>
-              Sale Info
-            </label>
-            <textarea
-              className='border-2 rounded-lg p-3 border-gray-300'
-              rows='5'
-              name='saleInfo'
-              placeholder='Add your sale inquery contact information'
-              onChange={handleSaleInfo}
-            ></textarea>
-          </div>
-        )}
-        <button
-          className='w-full p-4 mt-4 text-gray-100 bg-slate-500 hover:text-gray-800'
-          // disabled={!photo || !species || !name}
-          // disabled={true}
-          type='submit'
-        >
-          Add to Shrimpopedia!
-        </button>
       </form>
     </>
   );
