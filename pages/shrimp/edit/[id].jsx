@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSession, signIn, signOut } from 'next-auth/react';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 
 // using client side session retrieval
 const Edit = () => {
@@ -8,6 +9,10 @@ const Edit = () => {
   const [shrimpData, setShrimpData] = useState(null);
   const [isLoading, setLoading] = useState(false);
   const [shrimpId, setShrimpId] = useState('');
+
+  // getting id from page
+  const router = useRouter();
+  const { id } = router.query;
 
   //Form fields
   const [species, setSpecies] = useState(shrimpData?.species || '');
@@ -82,7 +87,6 @@ const Edit = () => {
         name,
         species,
         waterType,
-        photo,
         notes,
         sell,
         saleInfo,
@@ -91,12 +95,15 @@ const Edit = () => {
         morphType,
         gender,
       };
-      await fetch(`/api/shrimp`, {
+      await fetch(`/api/usershrimp/${id}`, {
         method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          userid: `${session.user.id}`,
+        },
         body: JSON.stringify(body),
       });
-      await Router.push(`/shrimp/${shrimpData.id}`);
+      await router.push(`/shrimp/${shrimpData.id}`);
     } catch (error) {
       console.error(error);
     }
@@ -104,15 +111,19 @@ const Edit = () => {
 
   useEffect(() => {
     if (isLoggedIn) {
+      // console.log('DATA IS THIS', session);
       const fetchData = async () => {
         try {
-          const body = {
-            id: session.user.id,
-          };
-          const response = await fetch(`/api/usershrimp`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(body),
+          // const body = {
+          //   id: session.user.id,
+          // };
+          const response = await fetch(`/api/usershrimp/${id}`, {
+            // method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              userid: `${session.user.id}`,
+            },
+            // body: JSON.stringify(body),
           });
           // console.log('RESP:', response);
           const json = await response.json();
@@ -153,6 +164,7 @@ const Edit = () => {
 
   if (!isLoading && shrimpData !== null) {
     console.log(shrimpData);
+    console.log('ID IS *****', id);
     return (
       <div className='flex flex-col items-center justify-start w-full pt-3 pb-3'>
         <div className='p-3 border-black border-2 rounded-md items-center flex flex-col mb-10 bg-amber-100'>
