@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSession, signIn, signOut } from 'next-auth/react';
 import UploadForm from '../components/UploadForm';
+import SignIn from '../components/SignIn';
 
 // using client side session retrieval
 const Upload = () => {
@@ -23,14 +24,7 @@ const Upload = () => {
       </div>
     );
   }
-  return (
-    <div className='py-20'>
-      Not signed in <br />
-      <button type='button' onClick={() => signIn()}>
-        Sign in
-      </button>
-    </div>
-  );
+  return <SignIn />;
 };
 
 export default Upload;

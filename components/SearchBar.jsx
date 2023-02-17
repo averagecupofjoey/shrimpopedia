@@ -6,7 +6,6 @@ const SearchBar = ({ sendSearchResults }) => {
 
   useEffect(() => {
     if (shrimpData !== '') {
-      // console.log('IN USE EFFECT');
       sendSearchResults(shrimpData);
     }
   }, [shrimpData, sendSearchResults]);
@@ -15,7 +14,6 @@ const SearchBar = ({ sendSearchResults }) => {
     e.preventDefault();
     try {
       const response = await fetch(`/api/shrimp?search=${searchTerm}`);
-      // console.log('RESP:', response);
       const json = await response.json();
       setShrimpData(json);
       setLoading(false);

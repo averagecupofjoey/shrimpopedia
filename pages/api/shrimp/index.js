@@ -67,7 +67,7 @@ export default async function handle(req, res) {
       ];
     } else {
       if (args.species !== '') {
-        filter.where.species.equals = args.species;
+        filter.where.species = args.species;
       }
 
       if (args.name !== '') {
