@@ -4,6 +4,7 @@ import ShrimpItem from '../components/ShrimpItem';
 import Link from 'next/link';
 import spinner from '../public/assets/spinner.svg';
 import Image from 'next/image';
+import SignIn from '../components/SignIn';
 
 // using client side session retrieval
 const Mytank = () => {
@@ -22,7 +23,10 @@ const Mytank = () => {
           };
           const response = await fetch(`/api/usershrimp`, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+              'Content-Type': 'application/json',
+              userid: `${session.user.id}`,
+            },
             body: JSON.stringify(body),
           });
           // console.log('RESP:', response);
@@ -88,14 +92,7 @@ const Mytank = () => {
       </div>
     );
   }
-  return (
-    <div className='py-20'>
-      Not signed in <br />
-      <button type='button' onClick={() => signIn()}>
-        Sign in
-      </button>
-    </div>
-  );
+  return <SignIn />;
 };
 
 export default Mytank;
