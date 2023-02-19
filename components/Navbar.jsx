@@ -7,7 +7,9 @@ import { useRouter } from 'next/router';
 // import { CgFileDocument } from 'react-icons/cg';
 import navImg from '../public/assets/logo.png';
 import shrimpopedia from '../public/assets/shrimpopedia.png';
+import shrimpopediaLogo from '../public/assets/shrimpopediaLogo2.png';
 import blueShrimp from '../public/assets/loading.png';
+import shrimpDrawing from '../public/assets/shrimpDrawing.png';
 
 const Navbar = () => {
   const [nav, setNav] = useState(false);
@@ -40,13 +42,15 @@ const Navbar = () => {
       ref={navRef}
       style={{ backgroundColor: `${navBg}` }}
       className={
-        shadow ? 'w-full h-20 shadow-xl z-[100]' : ' w-full h-20 z-[100]'
+        shadow
+          ? 'w-full h-20 shadow-xl z-[100] font-gloria-hallelujah'
+          : ' w-full h-20 z-[100] font-gloria-hallelujah'
       }
     >
       <div className='flex justify-between items-center w-full h-full px-2 2xl:px-16'>
         <Link href='/'>
           <Image
-            src={shrimpopedia}
+            src={shrimpopediaLogo}
             alt='/'
             width='65'
             height='50'
@@ -107,7 +111,7 @@ const Navbar = () => {
             <AiOutlineClose />
           </div>
           <div className='flex flex-col items-center justify-center w-full'>
-            <Image src={blueShrimp} alt='/' className='max-w-[50%]' />
+            <Image src={shrimpDrawing} alt='/' className='max-w-[50%]' />
             <div className='border-b border-gray-300'>
               <p className='w-full md:w-[90%] pb-4 text-hoverbase'>
                 TABLE OF CONTENTS
@@ -205,6 +209,20 @@ const Navbar = () => {
                     .............................................................................................................
                   </span>
                   <h3>5</h3>
+                </section>
+              </a>
+
+              <a href='/mytank'>
+                <section className='flex items-baseline active:bg-gray-700 rounded-md'>
+                  {/* <Link href='/'> */}
+                  <li onClick={() => setNav(false)} className='py-4 text-sm'>
+                    My&nbsp;Tank
+                  </li>
+                  {/* </Link> */}
+                  <span className='flex overflow-hidden tracking-widest'>
+                    .............................................................................................................
+                  </span>
+                  <h3>6</h3>
                 </section>
               </a>
               {/* <Link href='/shrimp'>

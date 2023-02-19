@@ -8,42 +8,6 @@ import Router from 'next/router';
 
 import '../node_modules/cropperjs/dist/cropper.min.css';
 
-// // Import doka
-// import { create } from '../react-doka/lib/doka.esm.min';
-
-// // Import React FilePond
-// import { FilePond, File, registerPlugin } from 'react-filepond';
-
-// // Import FilePond styles
-// import 'filepond/dist/filepond.min.css';
-
-// Import the Image EXIF Orientation and Image Preview plugins
-// Note: These need to be installed separately
-// `npm i filepond-plugin-image-preview filepond-plugin-image-exif-orientation --save`
-
-// import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orientation';
-// import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
-// import FilePondPluginImageCrop from 'filepond-plugin-image-crop';
-// import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';
-
-// import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
-// // Import the plugin code
-
-// import FilePondPluginImageEdit from 'filepond-plugin-image-edit';
-// import FilePondPluginImageResize from 'filepond-plugin-image-resize';
-// import FilePondPluginImageTransform from 'filepond-plugin-image-transform';
-
-// // Register the plugins
-// registerPlugin(
-//   FilePondPluginImageExifOrientation,
-//   FilePondPluginImagePreview,
-//   FilePondPluginFileValidateType,
-//   FilePondPluginImageCrop,
-//   FilePondPluginImageEdit,
-//   FilePondPluginImageResize,
-//   FilePondPluginImageTransform
-// );
-
 const UploadForm = () => {
   const [files, setFiles] = useState([]);
   const [imagePreview, setImagePreview] = useState('');

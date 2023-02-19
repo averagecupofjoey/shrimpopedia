@@ -66,7 +66,7 @@ const ShrimpId = () => {
 
   if (!isLoading && !noData) {
     return (
-      <div className='flex items-center justify-center  w-full pt-2 pb-2 font-gloria-hallelujah'>
+      <div className='flex items-center justify-center  w-full p-2 font-gloria-hallelujah'>
         <div className='border-2 border-blue-50 h-full w-[90vh] bg-[#f5f5f5] grid grid-cols-14 grid-rows-25 grid-flow-col '>
           <div className='col-span-2 row-span-25 border-r-4 border-red-600 grid grid-rows-25 '>
             <div className='row-span-3 border-b-2 border-blue-500'></div>
