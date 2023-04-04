@@ -120,7 +120,7 @@ const ShrimpId = () => {
           <HalfGap />
           <FullLine
             label='Notes'
-            value='Pokem ipsum dolor sit amet Hitmonchan Hidden Machine Jellicent Gary Smeargle Vulpix. Mewtwo Strikes Back Relicanth Mesprit Slowpoke Happiny Cacnea Flygon. Normal Crustle Darumaka Whiscash Mandibuzz Dewgong Elgyem. Sand-Attack Swadloon Kingdra Kanto Whismur Glitch City quis nostrud exercitation. Duis aute irure dolor in reprehenderit in voluptate Pupitar Uxie Hoothoot Pignite Pachirisu Muk.'
+            value={shrimpData.notes}
             height={height}
             width={width}
           />
@@ -133,7 +133,15 @@ const ShrimpId = () => {
           <FullLine />
           <FullLine />
           <FullLine />
-          <FullLine />
+          {shrimpData.sale === 'Yes' && (
+            <FullLine
+              label='Sale Info'
+              value={shrimpData.saleInfo}
+              height={height}
+              width={width}
+            />
+          )}
+          {shrimpData.sale === 'No' && <FullLine />}
           <FullLine />
           <FullLine />
           <FullLine />

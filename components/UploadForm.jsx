@@ -83,14 +83,15 @@ const UploadForm = () => {
   };
 
   const updateImagePreview = async (e) => {
-    // console.log('image changed');
-    // console.log('****', URL.createObjectURL(e.target.files[0]));
     const file = e.target.files[0];
-    const image = await resizeFile(file);
-    // console.log('****', image);
+    // const image = await resizeFile(file);
+
     setImagePreview(URL.createObjectURL(e.target.files[0]));
+    // console.log('HERE IS THE ORIGINAL FILE', file);
+    // console.log('HERE IS THE UPDATED FILE', image);
     // setImagePreview(image);
     setFileType(file.type);
+    // setFileType(image.type);
     openModal();
   };
 
@@ -98,15 +99,17 @@ const UploadForm = () => {
     new Promise((resolve) => {
       Resizer.imageFileResizer(
         file,
-        300,
-        300,
+        500,
+        500,
         'JPEG',
-        100,
+        70,
         0,
         (uri) => {
           resolve(uri);
         },
-        'base64'
+        'base64',
+        325,
+        325
       );
     });
 
@@ -274,6 +277,7 @@ const UploadForm = () => {
                   placeholder='e.g: Neocaridina'
                   id='species'
                   onChange={handleSpecies}
+                  maxLength='25'
                 />
               </div>
               <div className='flex flex-col'>
@@ -287,6 +291,7 @@ const UploadForm = () => {
                   id='name'
                   placeholder='e.g: Cherry Shrimp'
                   onChange={handleName}
+                  maxLength='20'
                 />
               </div>
             </div>
@@ -390,6 +395,7 @@ const UploadForm = () => {
                 id='notes'
                 placeholder='Add any interesting notes that you want to about this species here!'
                 onChange={handleNotes}
+                maxLength='200'
               ></textarea>
             </div>
             <div className='flex flex-col py-2 min-w-full'>
@@ -417,6 +423,7 @@ const UploadForm = () => {
                   name='saleInfo'
                   placeholder='Add your sale inquery contact information'
                   onChange={handleSaleInfo}
+                  maxLength='100'
                 ></textarea>
               </div>
             )}

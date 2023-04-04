@@ -70,7 +70,11 @@ const Mytank = () => {
         <div>Welcome {session.user?.email}!</div>
         <div>
           Not you?{' '}
-          <button type='button' onClick={() => signOut()}>
+          <button
+            className=' text-gray-100 bg-slate-500 hover:text-gray-800'
+            type='button'
+            onClick={() => signOut()}
+          >
             Sign Out
           </button>
         </div>

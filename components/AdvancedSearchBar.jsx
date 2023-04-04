@@ -202,7 +202,14 @@ const AdvancedSearchBar = ({ sendSearchResults }) => {
           <option value='Yes'>Yes</option>
         </select>
       </div>
-      <button type='submit'>Search</button>
+      <div className='flex justify-center items-center'>
+        <button
+          className=' text-gray-100 bg-slate-500 hover:text-gray-800'
+          type='submit'
+        >
+          Search
+        </button>
+      </div>
     </form>
   );
 };

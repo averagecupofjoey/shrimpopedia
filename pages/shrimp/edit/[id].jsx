@@ -187,6 +187,7 @@ const Edit = () => {
                   id='species'
                   value={species}
                   onChange={handleSpecies}
+                  maxLength='25'
                 />
               </div>
               <div className='flex flex-col'>
@@ -201,6 +202,7 @@ const Edit = () => {
                   placeholder='e.g: Cherry Shrimp'
                   value={name}
                   onChange={handleName}
+                  maxLength='20'
                 />
               </div>
             </div>
@@ -310,6 +312,7 @@ const Edit = () => {
                 value={notes}
                 placeholder='Add any interesting notes that you want to about this species here!'
                 onChange={handleNotes}
+                maxLength='200'
               ></textarea>
             </div>
             <div className='flex flex-col py-2'>
@@ -321,6 +324,7 @@ const Edit = () => {
                 value={sell}
                 onChange={handleSale}
                 className='border-2 rounded-lg p-3 border-gray-300'
+                maxLength='100'
               >
                 <option value='No'>No</option>
                 <option value='Yes'>Yes</option>
