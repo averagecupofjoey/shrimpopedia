@@ -8,7 +8,7 @@ export default function App({ Component, pageProps }) {
     <SessionProvider session={pageProps.session}>
       <div className='flex flex-col h-screen'>
         <Navbar />
-        <div className='flex flex-1 overflow-auto'>
+        <div className='flex flex-1 overflow-auto' id='scrollableDiv'>
           <Component {...pageProps} />
         </div>
       </div>

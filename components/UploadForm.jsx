@@ -83,14 +83,23 @@ const UploadForm = () => {
   };
 
   const updateImagePreview = async (e) => {
-    const file = e.target.files[0];
+    let file = e.target.files[0];
+    console.log('ORIGINAL FILE', file);
+    if (file.size > 1000000) {
+      file = await resizeFile(file);
+      console.log('NEW FILE', file);
+    }
     // const image = await resizeFile(file);
-
-    setImagePreview(URL.createObjectURL(e.target.files[0]));
     // console.log('HERE IS THE ORIGINAL FILE', file);
+
+    // setImagePreview(URL.createObjectURL(e.target.files[0]));
+    setImagePreview(URL.createObjectURL(file));
+
+    // console.log('%%%%%', URL.createObjectURL(e.target.files[0]));
     // console.log('HERE IS THE UPDATED FILE', image);
     // setImagePreview(image);
     setFileType(file.type);
+    // console.log('?????', file.type);
     // setFileType(image.type);
     openModal();
   };
@@ -102,12 +111,12 @@ const UploadForm = () => {
         500,
         500,
         'JPEG',
-        70,
+        50,
         0,
         (uri) => {
           resolve(uri);
         },
-        'base64',
+        'file',
         325,
         325
       );
@@ -151,7 +160,23 @@ const UploadForm = () => {
   // }, [cropper]);
 
   function getCroppedPhoto() {
-    let newPhoto = cropper.getCroppedCanvas().toDataURL({ fileType });
+    // let newPhoto = cropper.getCroppedCanvas().toDataURL(fileType);
+    let newPhoto = cropper.getCroppedCanvas().toDataURL('image/jpeg');
+
+    //calculate size of newPhoto https://stackoverflow.com/questions/18557497/how-to-get-html5-canvas-todataurl-file-size-in-javascript
+    let head = 'data:image/jpeg;base64,';
+    let imageSize = Math.round(((newPhoto.length - head.length) * 3) / 4);
+
+    console.log('Original size', imageSize);
+    // if size is greater than 1,000,000 bytes - run resize at 50 quality
+    if (imageSize > 1000000) {
+      console.log('original', newPhoto);
+      let fileToResize = cropper.getCroppedCanvas();
+      let resizedPhoto = resizeFile(fileToResize);
+      newPhoto = resizedPhoto.toDataURL('image/jpeg');
+      console.log('resized', newPhoto);
+    }
+
     setPhoto(newPhoto);
   }
 

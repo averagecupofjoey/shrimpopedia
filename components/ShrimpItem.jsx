@@ -6,12 +6,16 @@ const ShrimpItem = ({ data }) => {
   const [flipped, setFlipped] = useState(false);
 
   const { image, name, species, gender, sale, waterType, morphType } = data;
-  console.log(data);
   const entryLink = `/shrimp/${data.id}`;
 
   function buttonClick(event) {
     event.stopPropagation();
   }
+
+  // var base64str = image.substring(image.indexOf(',') + 1);
+  // var decoded = atob(base64str);
+
+  // console.log('FileSize: ' + decoded.length / 1e6);
 
   return (
     <div className='flex flex-col items-center cardContainer'>
@@ -35,10 +39,13 @@ const ShrimpItem = ({ data }) => {
             !flipped ? 'cardFront cardFrontShown' : 'cardFront cardFrontHidden'
           }
         >
-          <div className='w-[246px] h-[250px] sm:w-[296px] sm:h-[300px] lg:w-[321px] lg:h-[325px] '>
-            <img
-              src={image}
-              className='rounded-t-md object-contain border-b-2 border-black'
+          <div className='w-[246px] h-[250px] sm:w-[296px] sm:h-[300px] lg:w-[321px] lg:h-[325px]'>
+            <div
+              className='rounded-t-[.200rem] object-contain border-b-2 border-black w-[100%] h-[100%]'
+              style={{
+                backgroundImage: `url('${image}')`,
+                backgroundSize: 'cover',
+              }}
             />
           </div>
           <div className='flex flex-col items-center '>
