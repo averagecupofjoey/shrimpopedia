@@ -85,10 +85,9 @@ const UploadForm = () => {
   const updateImagePreview = async (e) => {
     let file = e.target.files[0];
     console.log('ORIGINAL FILE', file);
-    if (file.size > 1000000) {
-      file = await resizeFile(file);
-      console.log('NEW FILE', file);
-    }
+
+    file = await resizeFile(file);
+    console.log('NEW FILE', file);
     // const image = await resizeFile(file);
     // console.log('HERE IS THE ORIGINAL FILE', file);
 
@@ -111,7 +110,7 @@ const UploadForm = () => {
         500,
         500,
         'JPEG',
-        50,
+        70,
         0,
         (uri) => {
           resolve(uri);
@@ -160,22 +159,28 @@ const UploadForm = () => {
   // }, [cropper]);
 
   function getCroppedPhoto() {
-    // let newPhoto = cropper.getCroppedCanvas().toDataURL(fileType);
+    //Below is functionality to check if photo is greater than 1mb, but I have decided to automatically reduce file sizes regardless of initial upload size to save space in the database
+
     let newPhoto = cropper.getCroppedCanvas().toDataURL('image/jpeg');
 
     //calculate size of newPhoto https://stackoverflow.com/questions/18557497/how-to-get-html5-canvas-todataurl-file-size-in-javascript
-    let head = 'data:image/jpeg;base64,';
-    let imageSize = Math.round(((newPhoto.length - head.length) * 3) / 4);
+    // let head = 'data:image/jpeg;base64,';
+    // let imageSize = Math.round(((newPhoto.length - head.length) * 3) / 4);
 
-    console.log('Original size', imageSize);
     // if size is greater than 1,000,000 bytes - run resize at 50 quality
-    if (imageSize > 1000000) {
-      console.log('original', newPhoto);
-      let fileToResize = cropper.getCroppedCanvas();
-      let resizedPhoto = resizeFile(fileToResize);
-      newPhoto = resizedPhoto.toDataURL('image/jpeg');
-      console.log('resized', newPhoto);
-    }
+    // if (imageSize > 1000000) {
+    //   console.log('original', newPhoto);
+    //   let fileToResize = cropper.getCroppedCanvas();
+    //   let resizedPhoto = resizeFile(fileToResize);
+    //   newPhoto = resizedPhoto.toDataURL('image/jpeg');
+    //   console.log('resized', newPhoto);
+    // }
+    // let croppedPhoto = cropper.getCroppedCanvas();
+    // let resizedPhoto = resizeFile(croppedPhoto);
+    // // let newPhoto = resizeFile(cropper.getCroppedCanvas());
+
+    // let newPhoto = resizedPhoto.toDataURL('image/jpeg');
+    console.log('resized photo', newPhoto);
 
     setPhoto(newPhoto);
   }

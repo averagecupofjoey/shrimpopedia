@@ -41,20 +41,20 @@ const Shrimp = ({ feed }) => {
   };
 
   return (
-    <div className='grid grid-cols-1 grid-flow-row md:grid-cols-2 lg:grid-cols-3 gap-4 w-screen'>
-      <InfiniteScroll
-        // height={300}
-        dataLength={shrimpFeed.length - 1}
-        next={() => fetchData(pageNumber)}
-        scrollableTarget='scrollableDiv'
-        hasMore={hasMoreItems}
-        loader={<h4 className='col-span-1 mt-8'>Loading...</h4>}
-        endMessage={
-          <p style={{ textAlign: 'center' }}>
-            <b>Yay! You have seen it all</b>
-          </p>
-        }
-      >
+    <InfiniteScroll
+      // height={300}
+      dataLength={shrimpFeed.length - 1}
+      next={() => fetchData(pageNumber)}
+      scrollableTarget='scrollableDiv'
+      hasMore={hasMoreItems}
+      loader={<h4 className='col-span-1 mt-8'>Loading...</h4>}
+      endMessage={
+        <p style={{ textAlign: 'center' }}>
+          <b>Yay! You have seen it all</b>
+        </p>
+      }
+    >
+      <div className='grid grid-cols-1 grid-flow-row md:grid-cols-2 lg:grid-cols-3 gap-4 w-screen'>
         {shrimpFeed.map((el, idx) => {
           return (
             <div key={idx} className='flex flex-col items-center'>
@@ -64,17 +64,8 @@ const Shrimp = ({ feed }) => {
             </div>
           );
         })}
-      </InfiniteScroll>
-      {/* {feed.map((el, idx) => {
-        return (
-          <div key={idx} className='flex flex-col items-center'>
-            <div className='col-span-1 mt-8'>
-              <ShrimpItem data={el} />
-            </div>
-          </div>
-        );
-      })} */}
-    </div>
+      </div>
+    </InfiniteScroll>
   );
 };
 
